@@ -4,8 +4,8 @@
 int main()
 {
     int height,rad;
-    float area,vol;
-    float pi=3.1415926535;
+    double area,vol;
+    double pi=3.1415926535;
     printf("enter height:");
     scanf("%d",&height);
     printf("enter radius:");
