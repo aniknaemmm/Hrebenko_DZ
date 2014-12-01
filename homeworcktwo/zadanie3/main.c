@@ -13,10 +13,10 @@ int main()
     char b[]="Wiiliam";
     char c[]="Sue";
     char d[]="Judith";
-    printf("%7s | %+1.3f\n",a,anumb);
-    printf("%7s | %+1.3f\n",b,bnumb);
-    printf("%7s | %+1.3f\n",c,cnumb);
-    printf("%7s | %+1.3f\n",d,dnumb);
+    printf("%7s | %+.3f\n",a,anumb);
+    printf("%7s | %+.3f\n",b,bnumb);
+    printf("%7s | %+.3f\n",c,cnumb);
+    printf("%7s | %+.3f\n",d,dnumb);
 
     return 0;
 }
