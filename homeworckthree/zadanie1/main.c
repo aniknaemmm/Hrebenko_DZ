@@ -2,9 +2,8 @@
 #include <stdlib.h>
 
 int main(){
-    int n=0;
-    while (n++<127){
-    printf("Hello world!%d\n",n);
+    for(int i=1;i<=137;i++){
+            printf("%d\n",i);
     }
     return 0;
 }
