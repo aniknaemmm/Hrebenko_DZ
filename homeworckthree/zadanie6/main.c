@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 int main(){
-    int l,x,rez;
+    int l,x,rez=0;
     int p=0;
     printf("pls enter L>0 l=");
     scanf("\n%d",&l);
