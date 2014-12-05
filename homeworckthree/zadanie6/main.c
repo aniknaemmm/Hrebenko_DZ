@@ -5,9 +5,9 @@ int main(){
     int l,x,rez=0;
     int p=0;
     printf("pls enter L>0 l=");
-    scanf("\n%d",&l);
+    scanf("%d",&l);
     printf("pls enter x<=L x=");
-    scanf("\n%d",&x);
+    scanf("%d",&x);
         for(p=0;rez<=l;p++){
                 rez=1;
             for(int i=0;i<=p;i++){
