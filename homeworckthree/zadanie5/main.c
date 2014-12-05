@@ -2,8 +2,7 @@
 #include <stdlib.h>
 
 int main()
-{/*lutshe ispol'zovat' ^do-while^
-   */
+{
     int x,p;
     int rez=1;
     printf("pls enter x=");
