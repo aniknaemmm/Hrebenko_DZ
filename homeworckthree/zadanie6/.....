@@ -6,7 +6,7 @@ int main(){
     int p=0;
     printf("pls enter L>0 l=");
     scanf("%d",&l);
-    printf("pls enter x<=L x=");
+    printf("pls enter 1<x<=L x=");
     scanf("%d",&x);
         for(p=0;rez<=l;p++){
                 rez=1;
