@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <stdlib.h>
 void kvadrat(int razmerKvadrata,int speedAnimation){
   int i,k=1,numb=10;
     while(numb--)
@@ -21,7 +23,7 @@ void kvadrat(int razmerKvadrata,int speedAnimation){
 
 
                 }
-                system("cls");
+                system("clear");
             }
             k++;
 
@@ -46,7 +48,7 @@ void kvadrat(int razmerKvadrata,int speedAnimation){
 
 
                 }
-                system("cls");
+                system("clear");
             }
             k--;
         }

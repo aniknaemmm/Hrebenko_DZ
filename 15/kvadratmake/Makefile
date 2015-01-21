@@ -4,8 +4,8 @@ all: obj/main.o obj/kvadrat.o bin/
 obj/main.o: main.c obj/
 	gcc --std=c99  -o obj/main.o -c main.c
 
-obj/kvadrat.o:kvadrat.c obj/
-	gcc --std=c99 -o obj/kvadrat.o -c "../../modules/src/kvadrat.c"
+obj/kvadrat.o:../../modules/src/kvadrat.c obj/
+	gcc --std=c99 -o obj/kvadrat.o -c ../../modules/src/kvadrat.c
 
 bin/:
 	mkdir bin
