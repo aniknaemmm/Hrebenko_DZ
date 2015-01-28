@@ -60,8 +60,8 @@ int attributing_to_the_number_of_digits_at_the_end(int firstNumberUser,int nextN
 
 int cyclic_shift_numbers_including(int numberUser)
 {
-    int tempNumber=1;
-    int rez=0;
+
+    int rez;
  rez=separation_of_all_digits_except_the_first_number(numberUser)*10+allocation_of_the_first_number(numberUser);
 
     return rez;
