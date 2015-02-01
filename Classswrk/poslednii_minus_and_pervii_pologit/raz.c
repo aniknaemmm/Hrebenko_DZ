@@ -5,8 +5,7 @@ int posledniMinus(int mass[],int sizeN)
 {
     for(int i = sizeN -1; i>=0; i--)
     {
-        if(mass[i]<0)
-            return i;
+        if(mass[i]<0) return i;
     }
 
     return -1;
@@ -16,13 +15,13 @@ int posledniMinus(int mass[],int sizeN)
 
 int perviiPlus(int mass[],int sizeN)
 {
-    int index=-1,i=0;
-    for(; i<sizeN && index==-1; i++)
+
+    for(int i=0; i<sizeN; i++)
     {
-        if(mass[i]>0) index=i;
+        if(mass[i]>0) return i;
 
 
     }
 
-    return index;
+    return -1;
 }

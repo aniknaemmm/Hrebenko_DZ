@@ -36,7 +36,7 @@ int main()
     if(posledniMinus(mass,sizeN)==-1) printf("net otritcatel'nix chisel\n");
     else printf ("poslednee otritcatel'noe chiso %d s nomerom v massive %d\n",mass[posledniMinus(mass,sizeN)],posledniMinus(mass,sizeN));
 
-    if(posledniMinus(mass,sizeN)==-1) printf("net pologitel'nix chisel\n");
+    if(perviiPlus(mass,sizeN)==-1) printf("net pologitel'nix chisel\n");
     else printf ("pervoe pologitelnoe chiso %d s nomerom v massive %d\n",mass[perviiPlus(mass,sizeN)],perviiPlus(mass,sizeN));
 
     return 0;
