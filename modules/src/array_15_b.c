@@ -72,7 +72,6 @@ int nochotny(int mass[],int sizeN)
 }
 
 
-
 int maxNumberArray(int mass[],int n)
 {
     int tempMax=mass[0];
@@ -97,8 +96,38 @@ int minNumberArray(int mass[],int n)
 //--------TASK3----------------
 void maxTransferIndex(int mass[],int sizeN,int maxElentTransfer)
 {
-    for(int i=0; i<=sizeN;i++)
+    for(int i=0; i<=sizeN; i++)
     {
         if(mass[i]==maxElentTransfer) mass[i]=i;
     }
 }
+//--------TASK4----------------
+void allTransferMaxadnMin(int mass[],int sizeN,int maxChot,int minNochot)
+{
+    for(int i=0; i<=sizeN; i++)
+    {
+        if(mass[i]%2==0) mass[i]=maxChot;
+        else mass[i]=minNochot;
+    }
+}
+//--------TASK5----------------
+int lastPolog(int chotnyMass[],int chotnySize,int userNumber)
+{
+    for(int i=chotnySize; i>=0; i--)
+    {
+        if(chotnyMass[i]%userNumber==0&&chotnyMass[i]>0) return i;
+    }
+    return -1 ;
+}
+
+int indexMass(int mass[],int sizeN,int numberChotniAndCratny)
+{
+    for(int i=sizeN; i>=0; i--)
+    {
+        if(mass[i]==numberChotniAndCratny) return i;
+    }
+    return -1;
+}
+
+
+
