@@ -1,7 +1,7 @@
 #include <stdio.h>
 void arr_in(int mass[],int size)
 {
-    for(int i=0; i<size; i++)
+    for(int i=0; i<=size; i++)
     {
         printf("vvedite %d element massiva a[%d]=",i+1,i);
         scanf("%d",&mass[i]);
@@ -11,9 +11,9 @@ void arr_in(int mass[],int size)
 
 void arr_out(int mass[],int size)
 {
-    for(int i=0; i<size; i++)
+    for(int i=0; i<=size; i++)
     {
-        printf("a[%d]=%d\n",i,mass[i]);
+        printf("a[%2d]=% d\n",i,mass[i]);
     }
 }
 
@@ -21,7 +21,7 @@ void arr_out(int mass[],int size)
 void srch(int mass[],int size,int userNumberSrch)
 {
     int index=-1;
-    for(int i=0; i<size&&index==-1; i++)
+    for(int i=0; i<=size&&index==-1; i++)
     {
         if(mass[i]==userNumberSrch) index=i;
 

@@ -2,12 +2,12 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="poslednii_minus_and_pervii_pologit" />
+		<Option title="hometask_15_b" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/poslednii_minus_and_pervii_pologit" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Debug/hometask_15_b" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -16,7 +16,7 @@
 				</Compiler>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/poslednii_minus_and_pervii_pologit" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Release/hometask_15_b" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -31,30 +31,14 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="../../modules/include/arr_15_1.h" />
-		<Unit filename="../../modules/include/compotibility.h" />
-		<Unit filename="../../modules/include/liner_rnd.h" />
-		<Unit filename="../../modules/src/arr_15_1.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../../modules/src/compotibility.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../../modules/src/liner_rand.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="raz.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="raz.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
-			<lib_finder disable_auto="1" />
 			<debugger />
+			<lib_finder disable_auto="1" />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>

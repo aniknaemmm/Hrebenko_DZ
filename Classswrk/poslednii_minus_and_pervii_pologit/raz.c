@@ -5,8 +5,7 @@ int posledniMinus(int mass[],int sizeN)
 {
     for(int i = sizeN -1; i>=0; i--)
     {
-        if(mass[i]<0)
-            return i;
+        if(mass[i]<0) return i;
     }
 
     return -1;
