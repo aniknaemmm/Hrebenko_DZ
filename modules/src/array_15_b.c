@@ -142,23 +142,21 @@ int lengzz(int mass[],int sizeN,int index)
     return lengzz;
 }
 
-int nuli(int mass[],int sizeN,int index)
+int nuli(int mass[],int sizeN)
 {
     int lengt=-1;
-    int firstIndex;
+    int firstIndex=-1;
     for(int i=0; i<=sizeN; i++)
     {
-
         if(mass[i]==0)
         {
-
             lengt=lengt>lengzz(mass,sizeN,i)?lengt:lengzz(mass,sizeN,i);
             firstIndex=lengt>lengzz(mass,sizeN,i)?firstIndex:i;
             i+=lengzz(mass,sizeN,i);
         }
     }
-    index=firstIndex;
-    return lengt;
+
+    return firstIndex;
 }
 //--------TASK7----------------
 int onlyElementsArray(int mass[],int sizeN,int onlyElementsArray[])
@@ -235,5 +233,4 @@ void creatNewArray(int mass[],int sizeN,int newArray[])
         }
         newArray[i]=temp/(i+1);
     }
-
 }

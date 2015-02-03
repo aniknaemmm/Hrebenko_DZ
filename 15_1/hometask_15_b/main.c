@@ -13,7 +13,6 @@ int main()
     int chootnyMass[N];
     int nochotnyMass[N];
     int proverka=0;
-    int indexMaxLongDist=-1;
     int onlyElementsArrayq[N];
     int noOnlyElementsArrayq[N];
     int newArray[N];
@@ -81,7 +80,8 @@ int main()
                "7. max elemet odin raz vstrechaiushes9\n"
                "8. minimal'noe povtoriaiushiese\n"
                "9. koll povtori9iushixs9 elementov\n"
-               "10. max dlinna povtor elementov\n");
+               "10. max dlinna povtor elementov\n"
+               "11. new array\n");
 
 
         printf("choise you task :");
@@ -139,7 +139,6 @@ int main()
             printf("enter you naumber :");
             int chotniiElementuMassiva;
             scanf("%d",&chotniiElementuMassiva);
-            printf("%d\n",chotny(mass,sizeN,chootnyMass));
             if(chotny(mass,sizeN,chootnyMass)!=-1&&lastPolog(chootnyMass,chotny(mass,sizeN,chootnyMass),chotniiElementuMassiva)!=-1)
             {
                 int temp;
@@ -148,15 +147,16 @@ int main()
                 mass[indexMass(mass,sizeN,chootnyMass[lastPolog(chootnyMass,chotny(mass,sizeN,chootnyMass),chotniiElementuMassiva)])]=indexMass(mass,sizeN,chootnyMass[lastPolog(chootnyMass,chotny(mass,sizeN,chootnyMass),chotniiElementuMassiva)]);
                 mass[sizeN]=temp;
             }
+            else printf("eeror");
 
             arr_out(mass,sizeN);
             break;
         case 6 :
             arr_out(mass,sizeN);
-            if(nuli(mass,sizeN,indexMaxLongDist)==-1) printf("error");
-            else{
-            printf("indexi nachala i konca samogo dlinnogo uchastka 0 [%d,%d]",nuli(mass,sizeN,indexMaxLongDist),nuli(mass,sizeN,indexMaxLongDist)+indexMaxLongDist);
-            printf("%d",indexMaxLongDist);
+            if(nuli(mass,sizeN)==-1) printf("error");
+            else
+            {
+                printf("indexi nachala i konca samogo dlinnogo uchastka 0 [%d,%d]",nuli(mass,sizeN),nuli(mass,sizeN)+lengzz(mass,sizeN,nuli(mass,sizeN)));
             }
             break;
         case 7 :

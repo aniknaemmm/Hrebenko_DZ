@@ -23,7 +23,7 @@ int lastPolog(int chotnyMass[],int chotnySize,int userNumber);
 int indexMass(int mass[],int sizeN,int numberChotniAndCratny);
 //---TASK6---------------------
 int lengzz(int mass[],int sizeN,int index);
-int nuli(int mass[],int sizeN,int index);
+int nuli(int mass[],int sizeN);
 //---TASK7---------------------
 int onlyElementsArray(int mass[],int sizeN,int onlyElementsArrayq[]);
 //---TASK8---------------------
