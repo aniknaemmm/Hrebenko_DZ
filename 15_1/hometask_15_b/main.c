@@ -10,6 +10,8 @@
 int main()
 {
     int mass[N],sizeN,switchUser;
+    int chootnyMass[N];
+    int nochotnyMass[N];
     int proverka=0;
     do
     {
@@ -82,30 +84,32 @@ int main()
             printf("/----------------------------/\n"
                    "/----------new mass----------/\n");
             if(firstPlus(mass,sizeN)!=-1&&lastMinus(mass,sizeN)!=-1)
+            {
                 transfer(mass,lastMinus(mass,sizeN),firstPlus(mass,sizeN));
+                arr_out(mass,sizeN);
+            }
             else
                 printf("peremeshenie nebilo\n");
-            arr_out(mass,sizeN);
 
             break;
         case 2 :
             arr_out(mass,sizeN);
 
-            if(chotny(mass,sizeN)!=-1)
-                printf("maximal'niy chotniy chlen massiva %d\n",maxNumberArray(chootnyMass,chotny(mass,sizeN)));
+            if(chotny(mass,sizeN,chootnyMass)!=-1)
+                printf("maximal'niy chotniy chlen massiva %d\n",maxNumberArray(chootnyMass,chotny(mass,sizeN,chootnyMass)));
             else
                 printf("netu chotnix chisel\n");
-            if(nochotny(mass,sizeN)!=-1)
-                printf("minimal'niy ne cotniy chlen massiva %d\n",minNumberArray(nochotnyMass,nochotny(mass,sizeN)));
+            if(nochotny(mass,sizeN,nochotnyMass)!=-1)
+                printf("minimal'niy ne cotniy chlen massiva %d\n",minNumberArray(nochotnyMass,nochotny(mass,sizeN,nochotnyMass)));
             else
                 printf("netu nechotnix chisel\n");
 
             break;
         case 3 :
             arr_out(mass,sizeN);
-            if(chotny(mass,sizeN)!=-1)
+            if(chotny(mass,sizeN,chootnyMass)!=-1)
             {
-                maxTransferIndex(mass,sizeN,maxNumberArray(chootnyMass,chotny(mass,sizeN)));
+                maxTransferIndex(mass,sizeN,maxNumberArray(chootnyMass,chotny(mass,sizeN,chootnyMass)));
                 printf("/----------------------------/\n"
                        "/----------new mass----------/\n");
                 arr_out(mass,sizeN);
@@ -115,7 +119,7 @@ int main()
             break;
         case 4 :
             arr_out(mass,sizeN);
-            allTransferMaxadnMin(mass,sizeN,maxNumberArray(chootnyMass,chotny(mass,sizeN)),minNumberArray(nochotnyMass,nochotny(mass,sizeN)));
+            allTransferMaxadnMin(mass,sizeN,maxNumberArray(chootnyMass,chotny(mass,sizeN,chootnyMass)),minNumberArray(nochotnyMass,nochotny(mass,sizeN,nochotnyMass)));
             printf("/----------------------------/\n"
                    "/----------new mass----------/\n");
             arr_out(mass,sizeN);
@@ -126,16 +130,20 @@ int main()
             printf("enter you naumber :");
             int chotniiElementuMassiva;
             scanf("%d",&chotniiElementuMassiva);
-
-            if(chotny(mass,sizeN)!=-1&&lastPolog(chootnyMass,chotny(mass,sizeN),chotniiElementuMassiva)!=-1)
+                printf("%d\n",chotny(mass,sizeN,chootnyMass));
+            if(chotny(mass,sizeN,chootnyMass)!=-1&&lastPolog(chootnyMass,chotny(mass,sizeN,chootnyMass),chotniiElementuMassiva)!=-1)
             {
                 int temp;
-                temp=mass[indexMass(mass,sizeN,chootnyMass[lastPolog(chootnyMass,chotny(mass,sizeN),chotniiElementuMassiva)])];
-                mass[indexMass(mass,sizeN,chootnyMass[lastPolog(chootnyMass,chotny(mass,sizeN),chotniiElementuMassiva)])]=indexMass(mass,sizeN,chootnyMass[lastPolog(chootnyMass,chotny(mass,sizeN),chotniiElementuMassiva)]);
+                temp=mass[indexMass(mass,sizeN,chootnyMass[lastPolog(chootnyMass,chotny(mass,sizeN,chootnyMass),chotniiElementuMassiva)])];
+
+                mass[indexMass(mass,sizeN,chootnyMass[lastPolog(chootnyMass,chotny(mass,sizeN,chootnyMass),chotniiElementuMassiva)])]=indexMass(mass,sizeN,chootnyMass[lastPolog(chootnyMass,chotny(mass,sizeN,chootnyMass),chotniiElementuMassiva)]);
                 mass[sizeN]=temp;
             }
 
             arr_out(mass,sizeN);
+            break;
+        case 6 :
+
             break;
 
 

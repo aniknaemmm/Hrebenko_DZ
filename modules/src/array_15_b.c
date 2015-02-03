@@ -9,6 +9,13 @@ void randomArray(int mass[],int sizeN)
     }
 
 }
+void coppyArray(int massEtalon[],int sizeN,int massCoppy[])
+{
+    for(int i=0; i<=sizeN;i++)
+    {
+        massEtalon[i]=massCoppy[i];
+    }
+}
 //-------TASK1-------------
 int firstPlus(int mass[],int sizeN)
 {
@@ -18,7 +25,6 @@ int firstPlus(int mass[],int sizeN)
     }
     return -1;
 }
-
 
 int lastMinus(int mass[],int sizeN)
 {
@@ -40,7 +46,7 @@ void transfer(int mass[],int indexMinus, int indexPlus)
 }
 
 //------TASK2----------------------
-int chotny(int mass[],int sizeN)
+int chotny(int mass[],int sizeN,int chootnyMass[])
 {
     int nwsize=-1;
     for(int i=0; i<=sizeN; i++)
@@ -48,16 +54,14 @@ int chotny(int mass[],int sizeN)
         if(mass[i]%2==0)
         {
             ++nwsize;
-            chootnyMass[nwsize]=mass[i];
+           chootnyMass[nwsize]=mass[i];
         }
     }
 
     return nwsize;
 }
 
-
-
-int nochotny(int mass[],int sizeN)
+int nochotny(int mass[],int sizeN,int nochotnyMass[])
 {
     int nwsize=-1;
     for(int i=0; i<=sizeN; i++)
@@ -71,7 +75,6 @@ int nochotny(int mass[],int sizeN)
     return nwsize;
 }
 
-
 int maxNumberArray(int mass[],int n)
 {
     int tempMax=mass[0];
@@ -81,7 +84,6 @@ int maxNumberArray(int mass[],int n)
     }
     return tempMax ;
 }
-
 
 int minNumberArray(int mass[],int n)
 {
@@ -128,6 +130,29 @@ int indexMass(int mass[],int sizeN,int numberChotniAndCratny)
     }
     return -1;
 }
+//--------TASK6----------------
+int serhNumb(int mass[],int sizeN,int userNumber)
+{
+    for(int i=0; i<=sizeN; i++)
+    {
+        if(mass[i]==userNumber) return i;
+    }
+    return -1;
+}
+
+int nuli(int mass[],int sizeN,int index)
+{
+
+    int kollnuli=0;
+    for(int i=index; i<=sizeN; i++)
+    {
+        if(mass[i]==0)
+        {
+            kollnuli++;
 
 
-
+        }
+        else return i;
+    }
+    return sizeN;
+}
