@@ -14,6 +14,9 @@ int main()
     int nochotnyMass[N];
     int proverka=0;
     int indexMaxLongDist=-1;
+    int onlyElementsArrayq[N];
+    int noOnlyElementsArrayq[N];
+    int newArray[N];
     do
     {
         universalClear();
@@ -73,7 +76,12 @@ int main()
                "2. max sredi chotnix i minimum sredi nechotnix\n"
                "3. maxchotnie meniaem na ix index\n"
                "4. vse chotnie max a ne chotnie min\n"
-               "5. posledniu chotni pologit kratnii tvoemu chislu\n");
+               "5. posledniu chotni pologit kratnii tvoemu chislu\n"
+               "6. samie dllinnie nuli\n"
+               "7. max elemet odin raz vstrechaiushes9\n"
+               "8. minimal'noe povtoriaiushiese\n"
+               "9. koll povtori9iushixs9 elementov\n"
+               "10. max dlinna povtor elementov\n");
 
 
         printf("choise you task :");
@@ -144,12 +152,42 @@ int main()
             arr_out(mass,sizeN);
             break;
         case 6 :
-                arr_out(mass,sizeN);
-                printf("%d",nuli(mass,sizeN,indexMaxLongDist));
-                printf("%d",indexMaxLongDist);
+            arr_out(mass,sizeN);
+            if(nuli(mass,sizeN,indexMaxLongDist)==-1) printf("error");
+            else{
+            printf("indexi nachala i konca samogo dlinnogo uchastka 0 [%d,%d]",nuli(mass,sizeN,indexMaxLongDist),nuli(mass,sizeN,indexMaxLongDist)+indexMaxLongDist);
+            printf("%d",indexMaxLongDist);
+            }
+            break;
+        case 7 :
+            arr_out(mass,sizeN);
+            if(onlyElementsArray(mass,sizeN,onlyElementsArrayq)==-1) printf("error net ne povtoriaiushixs9 elementoov\n");
+            else printf("max element massive vstrech odin raz %d\n",maxNumberArray(onlyElementsArrayq,onlyElementsArray(mass,sizeN,onlyElementsArrayq)));
+            break;
+        case 8 :
+            arr_out(mass,sizeN);
+            if(noOnlyElementArray(mass,sizeN,noOnlyElementsArrayq)==-1) printf("Error fuck you number array noob\n");
+            else printf("min povtor element massiva %d ",minNumberArray(noOnlyElementsArrayq,noOnlyElementArray(mass,sizeN,noOnlyElementsArrayq)));
+            break;
+        case 9 :
+            arr_out(mass,sizeN);
+            if(noOnlyElementArray(mass,sizeN,noOnlyElementsArrayq)==-1) printf("Error fuck you number array noob\n");
+            else printf("koll elementov povtor v massive %d \n",noOnlyElementArray(mass,sizeN,noOnlyElementsArrayq)+1);
+            break;
+
+        case 10:
+            arr_out(mass,sizeN);
+            printf("max dlinna posledovat'nosti %d\n",maxPosledOnlyElem(mass,sizeN));
 
             break;
 
+        case 11:
+            arr_out(mass,sizeN);
+            creatNewArray(mass,sizeN,newArray);
+            printf("/----------------------------/\n"
+                   "/----------new mass----------/\n");
+            arr_out(newArray,sizeN);
+            break;
 
         default :
             printf("no TASK \n");

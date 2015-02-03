@@ -132,27 +132,108 @@ int indexMass(int mass[],int sizeN,int numberChotniAndCratny)
 }
 //--------TASK6----------------
 int lengzz(int mass[],int sizeN,int index)
-{   int lengzz=-1;
+{
+    int lengzz=-1;
     for(int i=index; i<=sizeN; i++)
-    {   lengzz++;
+    {
+        lengzz++;
         if(mass[i]!=0) return lengzz ;
     }
     return lengzz;
 }
 
 int nuli(int mass[],int sizeN,int index)
-{   int lengt=-1;
+{
+    int lengt=-1;
     int firstIndex;
-    for(int i=0;i<=sizeN;i++){
+    for(int i=0; i<=sizeN; i++)
+    {
 
-        if(mass[i]==0) {
+        if(mass[i]==0)
+        {
 
             lengt=lengt>lengzz(mass,sizeN,i)?lengt:lengzz(mass,sizeN,i);
             firstIndex=lengt>lengzz(mass,sizeN,i)?firstIndex:i;
-                i+=lengzz(mass,sizeN,i)+1;
+            i+=lengzz(mass,sizeN,i);
         }
     }
+    index=firstIndex;
+    return lengt;
+}
+//--------TASK7----------------
+int onlyElementsArray(int mass[],int sizeN,int onlyElementsArray[])
+{
+    int sizeArray=-1;
+    int temp;
+    for(int i=0; i<=sizeN; i++)
+    {
+        temp=-1;
+        for(int k=0; k<=sizeN&&temp==-1; k++)
+        {
+            if(mass[i]==mass[k]&&i!=k) temp=0;
+        }
+        if(temp==-1)
+        {
+            sizeArray++;
+            onlyElementsArray[sizeArray]=mass[i];
+        }
+    }
+    return sizeArray;
+}
+//--------TASK8----------------
+int noOnlyElementArray(int mass[],int sizeN,int noOnlyElementsArrayq[])
+{
+    int nwsize=-1,temp;
+    for(int i=0; i<=sizeN; i++)
+    {
+        temp=-1;
+        for(int k=0; k<=sizeN&&temp==-1; k++)
+        {
+            if(mass[i]==mass[k]&&i!=k) temp=0;
+        }
+        if(temp==0)
+        {
+            nwsize++;
+            noOnlyElementsArrayq[nwsize]=mass[i];
+        }
+    }
+    return nwsize;
+}
+//--------TASK9----------------
+//-----no_Function-------------
+//--------TASK10---------------
+int maxPosledOnlyElem(int mass[],int sizeN)
+{
+    int dlinna=1;
+    int maxDlinna=1;
+    for(int i=0; i<=sizeN; i++)
+    {
+        dlinna=1;
+        while(mass[i]==mass[i+1]&&i<sizeN)
+        {
+            dlinna++;
+            i++;
+        }
+        if(maxDlinna<dlinna)
+        {
+            maxDlinna=dlinna;
+        }
+    }
+    return maxDlinna;
+}
+//--------TASK11---------------
+void creatNewArray(int mass[],int sizeN,int newArray[])
+{
+    int temp;
+    for(int i=0; i<=sizeN; i++)
+    {
+        temp=0;
+        for(int k=0; k<=i; k++)
+        {
 
+            temp+=mass[k];
+        }
+        newArray[i]=temp/(i+1);
+    }
 
-  return lengt;
 }
