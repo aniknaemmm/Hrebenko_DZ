@@ -11,7 +11,7 @@ void randomArray(int mass[],int sizeN)
 }
 void coppyArray(int massEtalon[],int sizeN,int massCoppy[])
 {
-    for(int i=0; i<=sizeN;i++)
+    for(int i=0; i<=sizeN; i++)
     {
         massEtalon[i]=massCoppy[i];
     }
@@ -54,7 +54,7 @@ int chotny(int mass[],int sizeN,int chootnyMass[])
         if(mass[i]%2==0)
         {
             ++nwsize;
-           chootnyMass[nwsize]=mass[i];
+            chootnyMass[nwsize]=mass[i];
         }
     }
 
@@ -142,17 +142,23 @@ int serhNumb(int mass[],int sizeN,int userNumber)
 
 int nuli(int mass[],int sizeN,int index)
 {
+       int kollnuli=-1,tempSize=-1,tempIndex;
 
-    int kollnuli=0;
-    for(int i=index; i<=sizeN; i++)
-    {
-        if(mass[i]==0)
-        {
+    for(int i=0;i<=sizeN;i++){
+
+
+     if(kollnuli>tempSize)  index=tempIndex;
+     tempSize=kollnuli>tempSize?kollnuli:tempSize;
+
+
+     kollnuli=-1;
+        while(mass[i]==0&&i<=sizeN){
+                if(kollnuli==-1) tempIndex=i;
             kollnuli++;
-
-
+            i++;
         }
-        else return i;
+
+
     }
-    return sizeN;
+    return tempSize;
 }

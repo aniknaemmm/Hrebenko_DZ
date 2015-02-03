@@ -24,6 +24,6 @@ int lastPolog(int chotnyMass[],int chotnySize,int userNumber);
 int indexMass(int mass[],int sizeN,int numberChotniAndCratny);
 //---TASK6---------------------
 int serhNumb(int mass[],int sizeN,int userNumber);
-
+int nuli(int mass[],int sizeN,int index);
 
 #endif // ARRAY_15_B_H_INCLUDED

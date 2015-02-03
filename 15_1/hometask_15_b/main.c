@@ -13,6 +13,7 @@ int main()
     int chootnyMass[N];
     int nochotnyMass[N];
     int proverka=0;
+    int indexMaxLongDist=-1;
     do
     {
         universalClear();
@@ -130,7 +131,7 @@ int main()
             printf("enter you naumber :");
             int chotniiElementuMassiva;
             scanf("%d",&chotniiElementuMassiva);
-                printf("%d\n",chotny(mass,sizeN,chootnyMass));
+            printf("%d\n",chotny(mass,sizeN,chootnyMass));
             if(chotny(mass,sizeN,chootnyMass)!=-1&&lastPolog(chootnyMass,chotny(mass,sizeN,chootnyMass),chotniiElementuMassiva)!=-1)
             {
                 int temp;
@@ -143,6 +144,9 @@ int main()
             arr_out(mass,sizeN);
             break;
         case 6 :
+
+                printf("%d",nuli(mass,sizeN,indexMaxLongDist));
+                printf("%d",indexMaxLongDist);
 
             break;
 
