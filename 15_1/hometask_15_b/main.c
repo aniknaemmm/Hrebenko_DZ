@@ -144,7 +144,7 @@ int main()
             arr_out(mass,sizeN);
             break;
         case 6 :
-
+                arr_out(mass,sizeN);
                 printf("%d",nuli(mass,sizeN,indexMaxLongDist));
                 printf("%d",indexMaxLongDist);
 

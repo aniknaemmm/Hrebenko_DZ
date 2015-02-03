@@ -131,34 +131,28 @@ int indexMass(int mass[],int sizeN,int numberChotniAndCratny)
     return -1;
 }
 //--------TASK6----------------
-int serhNumb(int mass[],int sizeN,int userNumber)
-{
-    for(int i=0; i<=sizeN; i++)
-    {
-        if(mass[i]==userNumber) return i;
+int lengzz(int mass[],int sizeN,int index)
+{   int lengzz=-1;
+    for(int i=index; i<=sizeN; i++)
+    {   lengzz++;
+        if(mass[i]!=0) return lengzz ;
     }
-    return -1;
+    return lengzz;
 }
 
 int nuli(int mass[],int sizeN,int index)
-{
-       int kollnuli=-1,tempSize=-1,tempIndex;
-
+{   int lengt=-1;
+    int firstIndex;
     for(int i=0;i<=sizeN;i++){
 
+        if(mass[i]==0) {
 
-     if(kollnuli>tempSize)  index=tempIndex;
-     tempSize=kollnuli>tempSize?kollnuli:tempSize;
-
-
-     kollnuli=-1;
-        while(mass[i]==0&&i<=sizeN){
-                if(kollnuli==-1) tempIndex=i;
-            kollnuli++;
-            i++;
+            lengt=lengt>lengzz(mass,sizeN,i)?lengt:lengzz(mass,sizeN,i);
+            firstIndex=lengt>lengzz(mass,sizeN,i)?firstIndex:i;
+                i+=lengzz(mass,sizeN,i)+1;
         }
-
-
     }
-    return tempSize;
+
+
+  return lengt;
 }
