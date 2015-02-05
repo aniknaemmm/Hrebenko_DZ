@@ -11,11 +11,11 @@ int main()
 	char stack[30000];
 	int addresBrak[30000];
 	scanf("%s",&mas);
-	int end=0;
+	int end=-1;
 	for(int i=0;i<30000;i++)arr[i]=0;
 		int k=0;
 
-	for(int i=0;i<strlen(mas)&&end==0;i++)
+	for(int i=0;i<strlen(mas);i++)
 	{
 
 		switch(mas[i])
@@ -26,13 +26,25 @@ int main()
 		case '-':arr[k]--;break;
 	    case '.':putchar(arr[k]);break;
 	    case ',':arr[k]=getchar();
-        case ';':end =1;
+        case ';': return 0;
         case '[':
-            stack
-            if(arr[k]!=0)k++;
+            if (arr[k]==0)
+                while (arr[k]!=']')
+                    k++;
             else
+            {
+                addresBrak[end]=k;
+                ++end;
+            break;
+        case ']':
+            if (arr[k]!=0)
+                k=addresBrak[end-1];
+            break;
+        }
+        ++k;
+    }
 		}
 
-	}
+
 	return 0;
 }
