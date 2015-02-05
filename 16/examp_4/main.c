@@ -17,7 +17,7 @@ int main()
 
     for(int i=0; i<strlen(mas); i++)
     {
-
+    //printf("%  d-W%d  ",arr[0],arr[1]);
         switch(mas[i])
         {
         case '>':
@@ -41,20 +41,28 @@ int main()
             return 0;
         case '[':
             if (arr[k]==0)
-                while (arr[k]!=']')
-                    k++;
+                while (mas[i]!=']')
+                    i++;
             else
             {
-                addresBrak[end]=k;
-                ++end;
-                break;
-            case ']':
-                if (arr[k]!=0)
-                    k=addresBrak[end-1];
-                break;
+                addresBrak[end++]=i;
+
             }
-            ++k;
+
+            break;
+        case ']':
+            if(end==0) return 1;
+            if (arr[k]!=0)
+                i=addresBrak[end-1];
+            else
+            {
+
+                end--;
+            }
+            break;
+
         }
+
     }
 
 
