@@ -23,7 +23,6 @@ int main()
 		case '+':arr[k]++;break;
 		case '-':arr[k]--;break;
 	    case '.':putchar(arr[k]);break;
-	    case ',':arr[k]=getchar();break;
         case ';': return 0;
 		}
 
