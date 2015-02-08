@@ -21,7 +21,7 @@ int main()
                 printf("nepravel'no rastavlenni skobki");
                 return 0;
             }
-            stack[k--];
+           stack[k--];
         }
     }
     printf("skobki stoi9t normal'no");
