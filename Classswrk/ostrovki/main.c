@@ -42,24 +42,21 @@ int main()
                     first=0;
                 }
             }
+            else
+            {
+
+                    if(mass[i][j]==1) first=1;
+                    if(mass[i][j]==0&&first==1)
+                    {
+                        ostr++;
+                        first=0;
+                    }
 
 
 
 
-            /*
-
-                        if(mass[i][j]==0||wwrk==1)
-                        {
-                            if(mass[i][j]==1) first=1;
-                            if(mass[i][j]==0&&first==1)
-                            {
-                                ostr++;
-                                first=0;
-                            }
-                            wwrk=1;
-                        }
-                        else printf("net ostaravov");*/
         }
+    }
     }
     printf("ostrovov %d",ostr);
 
