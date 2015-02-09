@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#define sizennn 300
 int main()
 {
-    char you[100];
-    char stack[100];
+    char you[sizennn];
+    char stack[sizennn];
     int k=-1;
     printf("hello enter you skobki!\n");
     scanf("%s",&you);
@@ -21,9 +22,9 @@ int main()
                 printf("nepravel'no rastavlenni skobki");
                 return 0;
             }
-            stack[k--];
+           stack[k--];
         }
     }
-    printf("skobki stoi9t normal'no");
+    printf("skobki stoi9t pravilno");
     return 0;
 }
