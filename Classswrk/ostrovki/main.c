@@ -13,9 +13,9 @@ int main()
             mass[i][j]=abs(rand()%2);
         }
     }
-    for(int i=1; i<11; i++)
+    for(int i=0; i<12; i++)
     {
-        for(int j=1; j<11; j++)
+        for(int j=0; j<12; j++)
         {
             printf("[%d]",mass[i][j]);
         }
@@ -35,6 +35,8 @@ int main()
                     first=1;
                     ++ostr;
                     printf("%d %d nomer\n",i,j);
+
+
                 }
                 if(mass[i][j]==0)
                 {
@@ -45,12 +47,12 @@ int main()
             else
             {
 
-                    if(mass[i][j]==1) first=1;
+                   /* if(mass[i][j]==1) first=1;
                     if(mass[i][j]==0&&first==1)
                     {
                         ostr++;
                         first=0;
-                    }
+                    }*/
 
 
 
