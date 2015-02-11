@@ -2,28 +2,27 @@
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
+#define SIZEMASS 100
+
+
+void outt(int mass[][SIZEMASS],int size,int sized);
+void siftleft(int mass[][SIZEMASS],int size,int sized);
 int main()
+
 {
     srand(time(NULL));
     printf("Hello world!\n");
-    int arrays[5][5],colDvig,swapTime,arrayTemp[5];
-    for(int i=0; i<5; i++)
-    {
-        for(int k=0; k<5; k++)
-        {
-            arrays[i][k]=abs(rand()%100);
-        }
-    }
+    int arrays[SIZEMASS][SIZEMASS],colDvig,swapTime,arrayTemp[SIZEMASS];
+    int sizeFir,sizeNex;
+    printf("vvedite razmer");
+    scanf("%d%d",&sizeFir,&sizeNex);
 
-    for(int i=0; i<5; i++)
-    {
-        for(int k=0; k<5; k++)
-        {
-            printf("{%d}",arrays[i][k]);
-        }
-        printf("\n------------\n");
-    }
 
+    siftleft(arrays,sizeFir,sizeNex);
+
+
+
+    outt(arrays,sizeFir,sizeNex);
 
 
     for(int i=0; i<5; i++)
@@ -39,18 +38,10 @@ int main()
 
 
 
-    printf("\neeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\n");
 
 
 
-    for(int i=0; i<5; i++)
-    {
-        for(int k=0; k<5; k++)
-        {
-            printf("{%d}",arrays[i][k]);
-        }
-        printf("\n------------\n");
-    }
+    outt(arrays,5,5);
 
     for(int i=0; i<5; i++)
     {
@@ -62,19 +53,11 @@ int main()
         arrays[i][4]=swapTime;
 
     }
-    printf("\neeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\n");
 
 
 
-    for(int i=0; i<5; i++)
-    {
-        for(int k=0; k<5; k++)
-        {
-            printf("{%d}",arrays[i][k]);
-        }
-        printf("\n------------\n");
-    }
 
+    outt(arrays,5,5);
     for(int i=0; i<6; i++)
     {
 
@@ -100,18 +83,10 @@ int main()
 
 
     }
-    printf("\neeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\n");
 
 
 
-    for(int i=0; i<5; i++)
-    {
-        for(int k=0; k<5; k++)
-        {
-            printf("{%d}",arrays[i][k]);
-        }
-        printf("\n------------\n");
-    }
+    outt(arrays,5,5);
 
     for(int i=4; i>=-1; i--)
     {
@@ -124,21 +99,22 @@ int main()
 
             }
             else if(i==-1)
-                {
-                    arrays[0][k]=arrayTemp[k];
-                }
-
-                else{
-                arrays[i+1][k]=arrays[i][k];
-                }
+            {
+                arrays[0][k]=arrayTemp[k];
             }
 
-
+            else
+            {
+                arrays[i+1][k]=arrays[i][k];
+            }
         }
 
 
+    }
 
-    printf("\neeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\n");
+
+
+
 
 
 
@@ -155,3 +131,29 @@ int main()
 
     return 0;
 }
+/*
+
+void outt(int mass[][SIZEMASS],int size,int sized)
+{
+    printf("\n___________________________________\n");
+    for(int i=0; i<size; i++)
+    {
+        for(int k=0; k<sized; k++)
+        {
+            printf("{%d}",mass[size][sized]);
+        }
+        printf("\n------------\n");
+    }
+    printf("\n------------------------------------\n");
+}
+void siftleft(int arrays[][SIZEMASS],int size,int sized){
+ for(int i=0; i<size; i++)
+    {
+        for(int k=0; k<sized; k++)
+        {
+            arrays[i][k]=abs(rand()%100);
+        }
+    }
+
+outt(arrays,size,sized);
+}*/
