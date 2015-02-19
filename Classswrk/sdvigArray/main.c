@@ -6,7 +6,7 @@
 
 
 void outt(int mass[][SIZEMASS],int size,int sized);
-void siftleft(int mass[][SIZEMASS],int size,int sized);
+void siftleft(int mass(*arrays)[SIZEMASS],int size,int sized);
 int main()
 
 {
@@ -14,11 +14,12 @@ int main()
     printf("Hello world!\n");
     int arrays[SIZEMASS][SIZEMASS],colDvig,swapTime,arrayTemp[SIZEMASS];
     int sizeFir,sizeNex;
+
     printf("vvedite razmer");
     scanf("%d%d",&sizeFir,&sizeNex);
 
 
-    siftleft(arrays,sizeFir,sizeNex);
+    siftleft(p,sizeFir,sizeNex);
 
 
 
@@ -130,6 +131,8 @@ int main()
 
 
     return 0;
+}
+void siftleft(int** rr,int size,int sized){
 }
 /*
 
