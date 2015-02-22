@@ -7,16 +7,20 @@
 int main()
 {
     printf("Hello world!TTTxo\n");
-
-    int ttt[SIZE][SIZE][SIZE]={{{0}}};
-
+    int who=0,rez=0;
+    int ttt[SIZE][SIZE][SIZE]= {{{0}}};
 
     tttOxShow(ttt);
-    playTTTox(ttt);
-tttOxShow(ttt);
+    for(int i=0; (i<64)&&(rez==0); i++,who++)
+    {
 
-    playTTTox(ttt);
-tttOxShow(ttt);
+        playTTTox(ttt,who);
+        rez=vektorTTTox(ttt);
+        tttOxShow(ttt);
+        if(rez==2) printf("winer 2");
+
+        if(rez==1)printf("winer 1");
+    }
 
 
 
