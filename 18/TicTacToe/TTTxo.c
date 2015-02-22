@@ -76,10 +76,8 @@ int vektorTTTox(int ttt[][SIZE][SIZE])
 
                             if(ttt[zg][kg][ig]!=0)
                             {
-                                printf("\n%d\n",ttt[zg][kg][ig]);
                                 for(int p=0; p<SIZE&&((zg+vi>=0)&&(kg+vz>=0)&&(ig+vk>=0))&&((zg+vi<SIZE)&&(kg+vz<SIZE)&&(ig+vk<SIZE)); p++,zg+=vi,kg+=vz,ig+=vk)
                                 {
-                                    // printf("\n%d ----%d\n",ttt[zg][kg][ig],ttt[zg+vi][kg+vz][ig+vk]);
                                     if(ttt[zg][kg][ig]==ttt[zg+vi][kg+vz][ig+vk]&&!(vi==0&&vz==0&&vk==0)) flags++;
                                     if(flags==3)return ttt[zg][kg][ig];
 

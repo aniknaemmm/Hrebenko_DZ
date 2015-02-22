@@ -9,17 +9,14 @@ int main()
     printf("Hello world!TTTxo\n");
     int who=0,rez=0;
     int ttt[SIZE][SIZE][SIZE]= {{{0}}};
-
-    tttOxShow(ttt);
-    for(int i=0; (i<64)&&(rez==0); i++,who++)
+        tttOxShow(ttt);
+    for(int i=0; (i<SIZE*SIZE*SIZE)&&(rez==0); i++,who++)
     {
-
         playTTTox(ttt,who);
         rez=vektorTTTox(ttt);
         tttOxShow(ttt);
         if(rez==2) printf("winer 2");
-
-        if(rez==1)printf("winer 1");
+        if(rez==1) printf("winer 1");
     }
 
 
