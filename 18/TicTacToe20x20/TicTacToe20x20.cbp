@@ -31,6 +31,10 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="Tictaxtoe20x20.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Tictaxtoe20x20.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
