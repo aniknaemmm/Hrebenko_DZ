@@ -31,10 +31,13 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+<<<<<<< HEAD
 		<Unit filename="../../modules/include/compotibility.h" />
 		<Unit filename="../../modules/src/compotibility.c">
 			<Option compilerVar="CC" />
 		</Unit>
+=======
+>>>>>>> babee75c32605c5e04d6abd9b6ac750d65fbf371
 		<Unit filename="Tictaxtoe20x20.c">
 			<Option compilerVar="CC" />
 		</Unit>

@@ -36,9 +36,9 @@ int chekWinGame(int ticTacMazafak_array[][SIZE])
     {
         for(int i=0; i<SIZE; i++)
         {
-            for(int m=0; m<2; m++)
+            for(int m=-1; m<2; m++)
             {
-                for(int n=0; n<2; n++)
+                for(int n=-1; n<2; n++)
                 {
                     if(ticTacMazafak_array[i][k]!=0)
                     {
