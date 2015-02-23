@@ -2,12 +2,12 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="TicTacToe20x20" />
+		<Option title="arraySort" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/TicTacToe20x20" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Debug/arraySort" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -16,7 +16,7 @@
 				</Compiler>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/TicTacToe20x20" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Release/arraySort" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -31,14 +31,10 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="../../modules/include/compotibility.h" />
-		<Unit filename="../../modules/src/compotibility.c">
+		<Unit filename="../../modules/include/array_sort.h" />
+		<Unit filename="../../modules/src/array_sort.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="Tictaxtoe20x20.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Tictaxtoe20x20.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
