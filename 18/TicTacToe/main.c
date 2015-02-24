@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "TTTxo.h"
-
+#include "../../modules/include/compotibility.h"
 #define SIZE 4
 
 int main()
@@ -13,6 +13,7 @@ int main()
     for(int i=0; (i<SIZE*SIZE*SIZE)&&(rez==0); i++,who++)
     {
         playTTTox(ttt,who);
+        universalClear();
         rez=vektorTTTox(ttt);
         tttOxShow(ttt);
         if(rez==2) printf("winer 2");
