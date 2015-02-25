@@ -22,3 +22,29 @@ int fibImpl(i nt *memory,int n)
     return memory[n];
 
 }
+ длинный одномернный массив
+ int *mtu=NULL;
+ mtu=(int *)malloc(m*n*sizeof(int));
+ if(mtu==NULL) //ошибка
+ mtu[i*n+j]//обращение
+    free(mtu);
+ mtu=NULL;
+
+//----------------------------------
+
+указаетль на указатель
+int **mtu=NULL;
+mtu=(int **)malloc(m*sizeof(int*));
+if(mtu==NULL) //proverka
+for(int i=0;i<m;i++){
+    mtr[i]=(int *)malloc(n*sizeof(int));
+    if(mtu[i]==NULL)///udalit' vso
+
+}
+ mtu[i][j];
+ for(int i=0;i<m;i++){
+ free(mtu[i]);
+ mtu[i]=NULL;
+ }
+ free(mtu);
+ mtu=NULL;
