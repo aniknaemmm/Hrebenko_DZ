@@ -1,76 +1,58 @@
-#define _XOPEN_SOURSE_EXTENDED
-#define _POSIX_C_SOURSE 199309L
-
-#include <sys/ioctl.h> //esli my zahotim izmenit' razmer konsoli (pishetsya vmeste s <signal.h>)
-#include <signal.h>    //poluchaet signal ot OS o tom chto nuzhno pomenyat' razmer consoli
-#include <stdio.h>
-#include <stdlib.h>
 #include <ncurses.h>
-#include <locale.h>    //kodirovka?
-static char unusedCell[4] = "\342\227\206";
-enum Colors{normal, green, red,yellow}; // perechislenie cvetov
-void treatSigWinch(int signo);
+#include <ctype.h>
 
-void initialiseProgram()
+int main(void)
 {
-    setlocale(LC_ALL, "");
-    initscr();   //zastavlyaem ncurses rabotat'
-    signal (SIGWINCH, treatSigWinch); //vtoroy parametr nazyvaem kak hotim, perviy obyazatel'no tak
-    if(has_colors()==FALSE)
-    {
-        endwin();
-        fprintf(stderr, "no colors/n");
-        exit(1);
-    }
-    cbreak();
-    noecho(); //pryachem to chto nabiraem
-    curs_set(0); //pryachem kursor
-    start_color();
-    //init_pair(1, COLOR_GREEN, COLOR_BLACK);
-    init_pair(normal, COLOR_WHITE, COLOR_BLACK);
-    init_pair(green, COLOR_GREEN, COLOR_BLACK);
-    init_pair(red, COLOR_RED, COLOR_BLACK);
-    init_pair(yellow, COLOR_YELLOW, COLOR_BLACK);
-}
+	WINDOW *left,*right;
+	int maxx,maxy,halfx;
+	int ch;
 
-void treatSigWinch(int signo)
-{
-    struct winsize size;
-    ioctl(1, TIOCGWINSZ, (char *) &size); //menyaem razmer konsoli
-    resizeterm(size.ws_row, size.ws_col);
-}
+	initscr();
+	start_color();
+	init_pair(1,COLOR_BLACK,COLOR_BLUE);
+	init_pair(2,COLOR_BLACK,COLOR_RED);
 
+/* calculate window sizes and locations */
+	getmaxyx(stdscr,maxy,maxx);
+	halfx = maxx >> 1;						/* half the screen width */
 
-int main()
-{
-    initialiseProgram();
+/* create the two side-by-side windows */
+	if( (left = newwin(maxy,halfx,0,0)) == NULL)
+	{
+		endwin();
+		puts("Unable to create 'left' window");
+		return 1;
+	}
+	if( (right = newwin(maxy,halfx,0,halfx)) == NULL)
+	{
+		endwin();
+		puts("Unable to create 'right' window");
+		return 1;
+	}
 
-    attron(A_REVERSE);
-    attron(COLOR_PAIR(yellow)); //vklyuchaem cvet
-    printw("Hello world!");
-    attroff(COLOR_PAIR(yellow));
+/* Set up each window */
+	mvwaddstr(left,0,0,"Left window (type ~ to end)\n");
+	wbkgd(left,COLOR_PAIR(1));
+	wrefresh(left);
+	mvwaddstr(right,0,0,"Right window\n");
+	wbkgd(right,COLOR_PAIR(2));
+	wrefresh(right);
 
-    attroff(A_REVERSE);
-    refresh(); //ne zabyvat'!!!
-    getch(); //ozhidaet lyubogo vvoda klavish
-    attron(COLOR_PAIR(green));
-     attron(A_REVERSE);
-    attron(A_BLINK|A_BOLD);
-    flash();
-    move(5, 3);
-   printw("%s", unusedCell);
-    attroff(A_BLINK|A_BOLD);
-    attroff(COLOR_PAIR(green));
+/* Read keyboard and update each window */
+	do
+	{
+		ch = wgetch(left);					/* read/refresh left window */
+		if(isalpha(ch))
+		{
+			if(toupper(ch)>='A' && toupper(ch)<='M')
+				ch += 13;
+			else
+				ch -= 13;
+		}
+		waddch(right,ch);					/* write/refresh right window */
+		wrefresh(right);
+	} while(ch != '~');
 
-    attroff(A_REVERSE);
-    refresh();
-    getch();
-    attron(COLOR_PAIR(green)|A_BOLD|A_BLINK);
-    printw("Welcome !");
-    attroff(COLOR_PAIR(green)|A_BOLD|A_BLINK);
-    getch();
-    clear();
-    endwin();
-
-    return 0;
+	endwin();
+	return 0;
 }
