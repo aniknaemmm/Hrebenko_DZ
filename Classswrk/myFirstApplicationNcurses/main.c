@@ -10,7 +10,7 @@
 static char unusedCell[4] = "\342\227\206";
 enum Colors{normal, green, red,yellow}; // perechislenie cvetov
 void treatSigWinch(int signo);
-
+static int upDown = 0, leftRight = 0;
 void initialiseProgram()
 {
     setlocale(LC_ALL, "");
@@ -42,7 +42,9 @@ void treatSigWinch(int signo)
 
 
 int main()
-{
+{int rows,cols;
+rows=20;
+cols=20;
     initialiseProgram();
 
     attron(A_REVERSE);
@@ -70,7 +72,86 @@ int main()
     attroff(COLOR_PAIR(green)|A_BOLD|A_BLINK);
     getch();
     clear();
-    endwin();
+    for(int i=0;i<4;i++){
+            for(int k=0;k<4;k++){
+    mvprintw(i,k,"!");
+    }}
+      refresh();
+    getch();
+    mvprintw(2,2,"0");
+     refresh();
+    getch();
+keypad(stdscr, true);
+    int symbol = getch();
+    switch(symbol)
+    {
+    case KEY_UP:
+        if(upDown == 0 && leftRight == 0)
+        {
+            upDown = rows - 1;
+            leftRight = cols - 1;
+        }
+        else if(upDown == 0)
+        {
+            upDown = rows - 1;
+            --leftRight;
+        }
+        else
+        {
+            --upDown;
+        }
+        break;
+    case KEY_DOWN:
+        if(upDown == rows - 1 && leftRight == cols - 1)
+        {
+            upDown = 0;
+            leftRight = 0;
+        }
+        else if(upDown == rows - 1)
+        {
+            upDown = 0;
+            ++leftRight;
+        }
+        else
+        {
+            ++upDown;
+        }
+        break;
+    case KEY_LEFT:
+        if(upDown == 0 && leftRight == 0)
+        {
+            upDown = rows - 1;
+            leftRight = cols - 1;
+        }
+        else if(leftRight == 0)
+        {
+            --upDown;
+            leftRight = cols - 1;
+        }
+        else
+        {
+            --leftRight;
+        }
+        break;
+    case KEY_RIGHT:
+        if(upDown == rows - 1 && leftRight == cols - 1)
+        {
+            upDown = 0;
+            leftRight = 0;
+        }
+        else if(leftRight == cols - 1)
+        {
+            ++upDown;
+            leftRight = 0;
+        }
+        else
+        {
+            ++leftRight;
+        }
+        break;
+    }
+
+        endwin();
 
     return 0;
 }

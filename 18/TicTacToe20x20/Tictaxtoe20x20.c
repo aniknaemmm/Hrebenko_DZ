@@ -17,6 +17,7 @@ void playTTTox(int ticTacMazafak_array[][SIZE],int who)
     int tttxY,tttxX;
     do
     {
+
         printf("pls enter cordinate %c (x,y,z)\nx::",who%2==0?'x':'0');
         scanf("%d",&tttxY);
         printf("y::");
