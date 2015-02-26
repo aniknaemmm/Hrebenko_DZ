@@ -1,11 +1,5 @@
-#define _XOPEN_SOURSE_EXTENDED
-#define _POSIX_C_SOURSE 199309L
-
-#include <sys/ioctl.h> //esli my zahotim izmenit' razmer konsoli (pishetsya vmeste s <signal.h>)
-#include <signal.h>    //poluchaet signal ot OS o tom chto nuzhno pomenyat' razmer consoli
-#include <stdio.h>
-#include <stdlib.h>
 #include <ncurses.h>
+<<<<<<< HEAD
 #include <locale.h>    //kodirovka?
 static char unusedCell[4] = "\342\227\206";
 enum Colors{normal, green, red,yellow}; // perechislenie cvetov
@@ -154,4 +148,62 @@ keypad(stdscr, true);
         endwin();
 
     return 0;
+=======
+#include <ctype.h>
+
+int main(void)
+{
+	WINDOW *left,*right;
+	int maxx,maxy,halfx;
+	int ch;
+
+	initscr();
+	start_color();
+	init_pair(1,COLOR_BLACK,COLOR_BLUE);
+	init_pair(2,COLOR_BLACK,COLOR_RED);
+
+/* calculate window sizes and locations */
+	getmaxyx(stdscr,maxy,maxx);
+	halfx = maxx >> 1;						/* half the screen width */
+
+/* create the two side-by-side windows */
+	if( (left = newwin(maxy,halfx,0,0)) == NULL)
+	{
+		endwin();
+		puts("Unable to create 'left' window");
+		return 1;
+	}
+	if( (right = newwin(maxy,halfx,0,halfx)) == NULL)
+	{
+		endwin();
+		puts("Unable to create 'right' window");
+		return 1;
+	}
+
+/* Set up each window */
+	mvwaddstr(left,0,0,"Left window (type ~ to end)\n");
+	wbkgd(left,COLOR_PAIR(1));
+	wrefresh(left);
+	mvwaddstr(right,0,0,"Right window\n");
+	wbkgd(right,COLOR_PAIR(2));
+	wrefresh(right);
+
+/* Read keyboard and update each window */
+	do
+	{
+		ch = wgetch(left);					/* read/refresh left window */
+		if(isalpha(ch))
+		{
+			if(toupper(ch)>='A' && toupper(ch)<='M')
+				ch += 13;
+			else
+				ch -= 13;
+		}
+		waddch(right,ch);					/* write/refresh right window */
+		wrefresh(right);
+	} while(ch != '~');
+
+	endwin();
+	return 0;
+>>>>>>> 1cc84bb88783dc255187f27983cbff96a7654981
 }
