@@ -1,6 +1,6 @@
 #include "../include/compotibility.h"
 #include <stdio.h>
-int programmEnter(int arrayTempMemoryProgramm[])
+int programmEnter(int *arrayTempMemoryProgramm)
 {
     int numberCommandLine=0,tempCommand;
     printf("\ngo govnokodit'\n");
@@ -29,7 +29,7 @@ int programmEnter(int arrayTempMemoryProgramm[])
     return 1;
 }
 
-void runProgramm(int arrayTempMemoryProgramm[])
+void runProgramm(int *arrayTempMemoryProgramm)
 {
     int tempCommand,operand,stepRun=0,acamulator=0;
     do

@@ -1,30 +1,43 @@
-#include <ncurses.h>
+#include "TTT.h"
+#include <stdlib.h>
 
-int main(void)
+int main()
 {
-	MEVENT mort;
-	int ch;
+    int mass[20][20]= {{{0}}},chek_result=0;
+    initialiseProgram();
 
-	initscr();
-	noecho();
-	keypad(stdscr,TRUE);
 
-	mousemask(ALL_MOUSE_EVENTS,NULL);
+    drawTable(mass);
+    while(chek_result==0)
+    {
+        playGame(mass);
+        chek_result=chekWinGame(mass);
+    }
 
-	while(1)
-	{
-		ch = getch();
-		if( ch == KEY_MOUSE )
-		{
-			getmouse(&mort);
-			mvaddch(mort.y,mort.x,'*');
-			refresh();
-			continue;
-		}
-		if( ch == '\n' )
-			break;
-	}
+    if(chek_result==1)
+    {
+        attron(COLOR_PAIR(blue)|A_BLINK);
+        mvprintw(SIZE/2,SIZE+SIZE/2,"Winer O");
+        attroff(COLOR_PAIR(blue)|A_BLINK);
+    }
+    else if(chek_result==2)
+    {
+        attron(COLOR_PAIR(blue)|A_BLINK);
+        mvprintw(SIZE/2,SIZE+SIZE/2,"Winer X");
+        attroff(COLOR_PAIR(blue)|A_BLINK);
+    }
+    else
+    {
+        attron(COLOR_PAIR(blue)|A_BLINK);
+        mvprintw(SIZE/2,SIZE+SIZE/2,"no winer");
+        attroff(COLOR_PAIR(blue)|A_BLINK);
 
-	endwin();
-	return 0;
+    }
+    refresh();
+    getch();
+    endwin();
+    return 0;
 }
+
+
+

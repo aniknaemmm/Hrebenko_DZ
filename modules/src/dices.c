@@ -1,3 +1,4 @@
+#include <stdio.h>
 void kubikRubickSmutik(int number)
 {
     switch (number)

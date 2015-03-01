@@ -14,7 +14,7 @@ int fibonachi(int n)
     free(memory);
     return result;
 }
-int fibImpl(i nt *memory,int n)
+int fibImpl(int *memory,int n)
 {
 
     if(memory[n]<0)
@@ -38,7 +38,7 @@ mtu=(int **)malloc(m*sizeof(int*));
 if(mtu==NULL) //proverka
 for(int i=0;i<m;i++){
     mtr[i]=(int *)malloc(n*sizeof(int));
-    if(mtu[i]==NULL)///udalit' vso
+    if(mtu[i]==NULL)//udalit' vso
 
 }
  mtu[i][j];

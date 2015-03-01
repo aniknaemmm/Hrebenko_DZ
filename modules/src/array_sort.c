@@ -17,7 +17,7 @@ void showArrayint (int arraY[],int sizeN)
 }
 
 
-void selectionSort(int arraY[],int sizeN)
+void selectionSort(int *arraY,int sizeN)
 {
     int min,temp;
     for(int i=0; i<sizeN; i++)
@@ -36,7 +36,7 @@ void selectionSort(int arraY[],int sizeN)
     }
 }
 
-void  bubbleSort(int arraY[],int sizeN)
+void  bubbleSort(int *arraY,int sizeN)
 {
     int temp;
     for(int i=0; i<sizeN; i++)

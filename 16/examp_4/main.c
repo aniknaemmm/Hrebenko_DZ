@@ -1,23 +1,27 @@
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 
 
 
 int main()
 {
+    int a=0;
     char mas[30000];
-    char arr[30000];
-    char stack[30000];
+    char arr[30000]= {0};
     int addresBrak[30000];
-    scanf("%s",&mas);
-    int end=0;
-    for(int i=0; i<30000; i++)arr[i]=0;
-    int k=0;
-
-    for(int i=0; i<strlen(mas); i++)
+    for(int m=0; m<30000; m++)arr[m]='0';
+    do
     {
-    //printf("%  d-W%d  ",arr[0],arr[1]);
+        mas[a]=getchar();
+
+    }
+    while(mas[a++]!='\n');
+    int end=0,k=0;
+
+    for(int i=0; i<a; i++)
+    {
         switch(mas[i])
         {
         case '>':

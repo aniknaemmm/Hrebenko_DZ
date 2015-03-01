@@ -1,7 +1,10 @@
-#ifndef TTTXO_H_INCLUDED
-#define TTTXO_H_INCLUDED
+#ifndef TTT_H_INCLUDED
+#define TTT_H_INCLUDED
 #define SIZE 4
-void tttOxShow(int ttt[][SIZE][SIZE]);
-void playTTTox(int ttt[][SIZE][SIZE],int who);
-int vektorTTTox(int ttt[][SIZE][SIZE]);
-#endif // TTTXO_H_INCLUDED
+void drawTable(int mass[][SIZE][SIZE]);
+void drwka(int mass[][SIZE][SIZE]);
+void playGame(int mass[][SIZE][SIZE]);
+int chekWinGame(int mass[][SIZE][SIZE]);
+
+
+#endif // TTT_H_INCLUDED

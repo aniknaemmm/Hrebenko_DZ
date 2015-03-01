@@ -1,5 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
+
+#include "../../modules/include/compotibility.h"
 void sqr(int sizez)
 {
     int sizezz=sizez;

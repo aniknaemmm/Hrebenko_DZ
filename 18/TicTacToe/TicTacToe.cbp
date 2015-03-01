@@ -33,10 +33,14 @@
 		</Compiler>
 		<Unit filename="../../modules/include/compotibility.h" />
 		<Unit filename="../../modules/include/liner_rnd.h" />
+		<Unit filename="../../modules/include/ncursesinit.h" />
 		<Unit filename="../../modules/src/compotibility.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../../modules/src/liner_rand.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../modules/src/ncursesinit.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="TTTxo.c">

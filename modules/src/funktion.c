@@ -1,3 +1,4 @@
+#include <stdio.h>
 void function(int userNumb,int osnovanieSystem)
 {
     int rez,i=0;

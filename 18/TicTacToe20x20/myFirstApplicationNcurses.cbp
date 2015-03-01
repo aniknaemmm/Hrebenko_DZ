@@ -2,12 +2,12 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="TicTacToe20x20" />
+		<Option title="BigTicTacToe20x20" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/TicTacToe20x20" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Debug/myFirstApplicationNcurses" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -16,7 +16,7 @@
 				</Compiler>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/TicTacToe20x20" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Release/myFirstApplicationNcurses" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -31,25 +31,22 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-<<<<<<< HEAD
-		<Unit filename="../../modules/include/compotibility.h" />
-		<Unit filename="../../modules/src/compotibility.c">
+		<Unit filename="../../modules/include/ncursesinit.h" />
+		<Unit filename="../../modules/src/ncursesinit.c">
 			<Option compilerVar="CC" />
 		</Unit>
-=======
->>>>>>> babee75c32605c5e04d6abd9b6ac750d65fbf371
-		<Unit filename="Tictaxtoe20x20.c">
+		<Unit filename="TTT.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="Tictaxtoe20x20.h" />
+		<Unit filename="TTT.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Extensions>
 			<code_completion />
 			<envvars />
-			<debugger />
 			<lib_finder disable_auto="1" />
+			<debugger />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>

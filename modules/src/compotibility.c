@@ -20,7 +20,8 @@ void universalClear()
 }
 
 
-void universalSleep(double time){
+void universalSleep(double time)
+{
 #if defined(_WIN32)||defined(_WIN64)
     Sleep(time*1000);
 #elif defined(__linux__)

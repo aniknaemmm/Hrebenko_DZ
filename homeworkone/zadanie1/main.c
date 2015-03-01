@@ -10,8 +10,8 @@ int main()
     printf("that’s what good for the soul:\n");
     printf("peeking into windows\n");
     printf("watching tired housewives\n");
-    printf("trying to fight off\n");
-    printf("their beer-maddened husbands.\n");
+    printf("trying to fight off%d\n",'u');
+    printf("their beer-maddened husbands.%d\n",'d');
 
     return 0;
 }
