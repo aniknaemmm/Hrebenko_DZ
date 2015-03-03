@@ -27,9 +27,9 @@ int main()
     }
     else
     {
-        attron(COLOR_PAIR(blue)|A_BLINK);
+        attron(COLOR_PAIR(red)|A_BLINK);
         mvprintw(SIZE/2,SIZE+SIZE/2,"no winer");
-        attroff(COLOR_PAIR(blue)|A_BLINK);
+        attroff(COLOR_PAIR(red)|A_BLINK);
 
     }
     refresh();
