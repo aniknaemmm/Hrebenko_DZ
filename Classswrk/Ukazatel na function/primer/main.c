@@ -27,8 +27,8 @@ bool less(int a,int b)
 //a>b
 //a<b
 //sumOfDigits(a)>sumOfDigits(b);
-    return a*2>b;
-
+  //  return a*2>b;
+    return sumOfDigits(a)>sumOfDigits(b);
 }
 
 void outputArray(const int *a,int n)
