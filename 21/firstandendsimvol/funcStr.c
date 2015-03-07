@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdio.h>
 #define SPACE " .,!\n\t\r~"
+#define BUFERSIZE 200
 char *searchWord(char *stringOne,char *buferr)
 {
     char *bufer=buferr;
@@ -21,9 +22,10 @@ char *searchWord(char *stringOne,char *buferr)
 
     return bufer;
 }
-void showWord(char *stringOne){
+void showWord(char *stringOne)
+{
 
-    char bufer[100]={0};
+    char bufer[BUFERSIZE]= {0};
     char *pts;
     char *str=stringOne;
 

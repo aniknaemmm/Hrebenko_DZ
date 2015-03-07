@@ -15,7 +15,6 @@ int main()
     fprintf(stdout,"use nex function");
     printf("\n%d result my function   %d result std lib function\n",myStrlen(temp0),strlen(temp1));
     fprintf(stdout,"printf string temp3[]=%s\n",temp3);
-//myStrcpy(temp0,temp3);
     fprintf(stdout,"\ncopy string temp3 to temp1\n%s",myStrcpy(temp0,temp3));
 
   return 0;
