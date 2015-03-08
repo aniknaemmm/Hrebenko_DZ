@@ -1,4 +1,4 @@
-#define SPACE " ,.!?\n"
+#define SPACE " :;,.!?\n"
 #include <string.h>
 #include <stdio.h>
 #include "wordto*.h"
@@ -19,6 +19,7 @@ char *searchProstSlov(const char *stringOne,char *bufer)
         }
         pts=strtok(NULL,SPACE);
     }
+
     return bufer;
 }
 
@@ -38,10 +39,10 @@ void zamenaSlov(char *stringOne,char *bufer)
     char *str=bufer;
     char *pts;
     pts=strtok(str,"!");
-    while(pts!=NULL)
+        while(pts!=NULL)
     {
         temp=strstr(stringOne,pts);
-        if(temp!=NULL&&((temp[strlen(pts)]==' ')||(temp[strlen(pts)]=='.')||(temp[strlen(pts)]=='!')||(temp[strlen(pts)]==',')))
+        if(temp!=NULL&&((temp[strlen(pts)]==':')||(temp[strlen(pts)]==' ')||(temp[strlen(pts)]=='.')||(temp[strlen(pts)]=='!')||(temp[strlen(pts)]==',')))
         {
             for(int i=1; i<strlen(pts); i++)
             {
@@ -50,5 +51,5 @@ void zamenaSlov(char *stringOne,char *bufer)
             }
         }
         pts=strtok(NULL,"!");
-       }
+    }
 }
