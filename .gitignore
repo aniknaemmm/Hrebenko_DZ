@@ -18,7 +18,8 @@ obj/
 *.dylib
 
 # Qt-es
-
+*.pri
+*.pro
 /.qmake.cache
 /.qmake.stash
 *.pro.user
