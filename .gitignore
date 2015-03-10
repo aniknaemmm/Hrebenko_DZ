@@ -23,10 +23,6 @@ obj/
 
 
 # Qt-es
-*.pri
-*.pro
-/.qmake.cache
-/.qmake.stash
 *.pro.user
 *.pro.user.*
 *.qbs.user
