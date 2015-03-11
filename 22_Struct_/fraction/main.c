@@ -1,13 +1,17 @@
-#include "myCat.h"
+#include "fraction.h"
 
 int main(void)
 {
     MyNumb firstNumber,nextNumber,result;
-    enterNumber(&nextNumber);
     enterNumber(&firstNumber);
-    result=summ(firstNumber,nextNumber);
-    showNumber(result);
+    enterNumber(&nextNumber);
+    //result=summ(firstNumber,nextNumber);
+    printf("%d-%d\n\n\n",nextNumber.numerator,nextNumber.denumerator);
 
+    convFractionMixed(&nextNumber);
+    showNumber(nextNumber);
+    convFractionNoMixed(&nextNumber);
+    showNumber(nextNumber);
 
 
     return 0;

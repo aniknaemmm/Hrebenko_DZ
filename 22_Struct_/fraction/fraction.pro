@@ -4,11 +4,11 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += main.c \
-    MyCaT.c
+    fraction.c
 
 include(deployment.pri)
 qtcAddDeployment()
 
 HEADERS += \
-    myCat.h
+    fraction.h
 
