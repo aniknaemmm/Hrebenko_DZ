@@ -17,5 +17,8 @@ void convFractionNoMixed(MyNumb *data);
 void enterNumber(MyNumb *data);
 void showNumber(MyNumb number);
 MyNumb summ(MyNumb first,MyNumb next);
-
-#endif // MYCAT_H
+MyNumb multiplication(MyNumb first,MyNumb next);
+MyNumb division(MyNumb first,MyNumb next);
+MyNumb subtraction(MyNumb first,MyNumb next);
+int gcd(int,int);
+#endif
