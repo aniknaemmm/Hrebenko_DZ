@@ -24,7 +24,7 @@ void showNumber(MyNumb number){
     if(number.numerator==0)
         printf("%d\n",number.integer);
     if(number.integer==0&&number.numerator!=0)
-        printf("%d/%d\n",number.numerator,number.denumerator);
+        printf("%d\n",number.numerator,number.denumerator==1?printf(" "):printf("/%d",number.denumerator));
     if(number.integer!=0&&number.numerator!=0)
         printf("%d-%d/%d\n",number.integer,number.numerator,number.denumerator);
 }
@@ -33,7 +33,9 @@ void showNumber(MyNumb number){
 void convFractionMixed(MyNumb *data){
     int temp=0;
     temp=data->integer*data->denumerator;
-    data->numerator+=temp;
+    data->numerator+=abs(temp);
+    if(temp<0)
+        data->numerator*=-1;
     data->integer=0;
 }
 
