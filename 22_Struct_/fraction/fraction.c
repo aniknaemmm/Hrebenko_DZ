@@ -24,7 +24,7 @@ void showNumber(MyNumb number){
     if(number.numerator==0)
         printf("%d\n",number.integer);
     if(number.integer==0&&number.numerator!=0)
-        printf("%d\n",number.numerator,number.denumerator==1?printf(" "):printf("/%d",number.denumerator));
+        printf("%d/%d\n",number.numerator,number.denumerator);
     if(number.integer!=0&&number.numerator!=0)
         printf("%d-%d/%d\n",number.integer,number.numerator,number.denumerator);
 }
