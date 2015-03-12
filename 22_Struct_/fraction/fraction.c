@@ -12,7 +12,7 @@ int gcd(int first,int next){
 
 void enterNumber(MyNumb *data){
     do{
-    printf("enter integer_numerator_denumerator\n");
+    printf("\n*** numerator and denumenatr(!=0) >0 \nenter integer_numerator_denumerator\n");
     scanf("%d%d%d",&data->integer,&data->numerator,&data->denumerator);
     }
     while(data->denumerator==0&&printf("err denum = 0\n"));
@@ -23,8 +23,12 @@ void showNumber(MyNumb number){
 
     if(number.numerator==0)
         printf("%d\n",number.integer);
-    if(number.integer==0&&number.numerator!=0)
-        printf("%d/%d\n",number.numerator,number.denumerator);
+    if(number.integer==0&&number.numerator!=0){
+        if(number.denumerator==1)
+            printf("%d\n",number.numerator);
+        else
+            printf("%d/%d\n",number.numerator,number.denumerator);
+    }
     if(number.integer!=0&&number.numerator!=0)
         printf("%d-%d/%d\n",number.integer,number.numerator,number.denumerator);
 }
@@ -81,8 +85,10 @@ MyNumb multiplication(MyNumb first,MyNumb next){
 
 MyNumb division(MyNumb first,MyNumb next){
     MyNumb result;
-    result.denumerator=first.denumerator*next.numerator;
+    result.denumerator=abs(first.denumerator*next.numerator);
     result.numerator=first.numerator*next.denumerator;
+    if(first.numerator/next.numerator<0)
+        result.numerator*=-1;
     result.integer=0;
     return result;
 }
