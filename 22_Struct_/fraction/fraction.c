@@ -15,7 +15,7 @@ void enterNumber(MyNumb *data){
     printf("\n*** numerator and denumenatr(!=0) >0 \nenter integer_numerator_denumerator\n");
     scanf("%d%d%d",&data->integer,&data->numerator,&data->denumerator);
     }
-    while(data->denumerator==0&&printf("err denum = 0\n"));
+    while((data->denumerator==0&&printf("err denum = 0\n"))||(data->numerator<0&&printf("err num< 0\n")));
 
 }
 
@@ -30,7 +30,7 @@ void showNumber(MyNumb number){
             printf("%d/%d\n",number.numerator,number.denumerator);
     }
     if(number.integer!=0&&number.numerator!=0)
-        printf("%d-%d/%d\n",number.integer,number.numerator,number.denumerator);
+        printf("%d %d/%d\n",number.integer,number.numerator,number.denumerator);
 }
 
 
