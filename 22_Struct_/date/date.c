@@ -10,7 +10,7 @@ void enterDate(Date *data){
 }
 
 bool chekNormalyEnterDate(Date data){
-    if(((data.month==aprel)||(data.month==iyun)||(data.month==sentiab)||(data.month==novemb))&&data.day<=30)
+    if(((data.month==aprel)||(data.month==iyun)||(data.month==sentiбab)||(data.month==novemb))&&data.day<=30)
         return true;
     if(data.month==feb&&visokYear(data)&&data.day<=29)
         return true;
@@ -37,45 +37,30 @@ void showDate(Date data){
     printf("%02d.%02d.%04d",data.day,data.month,data.year);
 }
 
-void addingDay(Date *date){
+void addingDay(Date *data){
     int temp;
     printf("pls enter adding day:");
     scanf("%d",&temp);
-    date->day+=temp;
-    convDate(date);
-}
-
-
-
-
-void convDate(Date *data){
-   while((data->day>366)){
-        if(visokYear(*data)){
-            data->day-=366;
-            data->year+=1;
-        }else{
-            data->day-=365;
-            data->year+=1;
-        }
-  }
-
-   while (!chekNormalyEnterDate(*data)) {
-       if(visokYear(*data)&&data->month==feb){
+   while (temp) {
+       temp--;
+       if(visokYear(*data)&&data->month==feb&&data->day==29){
            data->month+=1;
-           data->day-=29;
+           data->day=1;
        }
-       else if(!visokYear(*data)&&data->month==feb){
+       else if(!visokYear(*data)&&data->month==feb&&data->day==28){
            data->month+=1;
-           data->day-=28;
+           data->day=1;
        }
-       else if((data->month==aprel)||(data->month==iyun)||(data->month==sentiab)||(data->month==novemb)){
+       else if((data->month==aprel)||(data->month==iyun)||(data->month==sentiab)||(data->month==novemb)&&data->day==30){
            data->month+=1;
-           data->day-=30;
+           data->day=1;
 
-       }else{
+       }else if(data->day==31)
+      {
            data->month+=1;
-           data->day-=31;
-       }
+           data->day=1;
+       }else
+             data->day+=1;
 
        if(data->month==13){
            data->month=1;
@@ -93,14 +78,15 @@ int diffDateDay(Date firsdata,Date nextdata){
         nextdata.day-=1;
         diffday+=1;
         if(nextdata.day==0){
+               nextdata.month-=1;
             if(nextdata.month==march&&visokYear(nextdata))
                     nextdata.day=29;
             else if(nextdata.month==march&&!visokYear(nextdata))
                     nextdata.day=28;
             else if((nextdata.month==aprel)||(nextdata.month==iyun)||(nextdata.month==sentiab)||(nextdata.month==novemb)||(nextdata.month==ja)||(nextdata.month==avgust))
-                    nextdata.day=31;
-            else nextdata.day=30;
-            nextdata.month-=1;
+                    nextdata.day=30;
+            else nextdata.day=31;
+            
         }
 
 
@@ -110,7 +96,4 @@ int diffDateDay(Date firsdata,Date nextdata){
         }
     }
 return diffday;
-
-
 }
-/*w*/

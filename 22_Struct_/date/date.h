@@ -15,7 +15,6 @@ bool chekNormalyEnterDate(Date data);
 void enterDate(Date *data);
 void showDate(Date data);
 void addingDay(Date *date);
-void convDate(Date *data);
 int diffDateDay(Date firsdata,Date nextdata);
 #endif // DATE_H
 
