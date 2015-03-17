@@ -12,7 +12,7 @@ int gcd(int first,int next){
 
 void enterNumber(MyNumb *data){
     do{
-    printf("\n*** numerator and denumenatr(!=0) >0 \nenter integer_numerator_denumerator\n");
+    printf("*** numerator and denumenatr(!=0) >0 enter integer_numerator_denumerator\n");
     scanf("%d%d%d",&data->integer,&data->numerator,&data->denumerator);
     }
     while((data->denumerator==0&&printf("err denum = 0\n"))||(data->numerator<0&&printf("err num< 0\n")));
