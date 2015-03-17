@@ -3,7 +3,7 @@
 void enterDate(Date *data){
 
     do{
-    printf("ente date format dd.mm.gg\n");
+    printf("enter date format dd.mm.gg\n");
     scanf("%d.%d.%d",&data->day,&data->month,&data->year);
     }while(!(chekNormalyEnterDate(*data))&&printf("ivalid value"));
 
@@ -41,52 +41,40 @@ void addingDay(Date *date){
     int temp;
     printf("pls enter adding day:");
     scanf("%d",&temp);
-    date->day+=temp;
-    convDate(date);
-}
 
-
-
-
-void convDate(Date *data){
-   while((data->day>366)){
-        if(visokYear(*data)){
-            data->day-=366;
-            data->year+=1;
-        }else{
-            data->day-=365;
-            data->year+=1;
+    while (temp) {
+        temp--;
+        if((date->month==march)&&(visokYear(*date))&&(date->day==29)){
+            date->day=1;
+            date->month+=1;
         }
-  }
+        else if(date->month==march&&!visokYear(*date)&&date->day==28){
+            date->day=1;
+            date->month+=1;
+        }
 
-   while (!chekNormalyEnterDate(*data)) {
-       if(visokYear(*data)&&data->month==feb){
-           data->month+=1;
-           data->day-=29;
-       }
-       else if(!visokYear(*data)&&data->month==feb){
-           data->month+=1;
-           data->day-=28;
-       }
-       else if((data->month==aprel)||(data->month==iyun)||(data->month==sentiab)||(data->month==novemb)){
-           data->month+=1;
-           data->day-=30;
+        else if(((date->month==aprel)||(date->month==iyun)||(date->month==sentiab)||(date->month==novemb)||(date->month==ja)||(date->month==avgust))&&date->day==31)
+        {
+            date->day=1;
+            date->month+=1;
+        }
+        else if((date->day==30)&&!((date->month==aprel)||(date->month==iyun)||(date->month==sentiab)||(date->month==novemb)||(date->month==ja)||(date->month==avgust))){
+            date->day=1;
+            date->month+=1;
+         }else
+            date->day+=1;
 
-       }else{
-           data->month+=1;
-           data->day-=31;
-       }
 
-       if(data->month==13){
-           data->month=1;
-           data->year+=1;
-       }
 
+         if(date->month==13){
+             date->month=1;
+             date->year+=1;
+         }
    }
 }
 
+
 int diffDateDay(Date firsdata,Date nextdata){
-    Date temp;
     int diffday=0;
     while((nextdata.month!=firsdata.month)||(nextdata.day!=firsdata.day)||(nextdata.year!=firsdata.year)){
 
@@ -113,4 +101,4 @@ return diffday;
 
 
 }
-/*w*/
+
