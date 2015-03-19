@@ -5,8 +5,7 @@ void addList(ListNode **list,int data){
     tempList->data=data;
     tempList->next=*list;
     *list=tempList;
-
-
+    tempList=NULL;
 }
 
 
@@ -16,7 +15,6 @@ void printList(ListNode *list){
         printf("%d ",temp->data+1);
         temp=temp->next;
     }
-
 }
 
 
@@ -27,8 +25,6 @@ void dellist(ListNode **list){
         free(*list);
         *list=temp;
     }
-
-
 }
 
 int popList(ListNode **list){
@@ -43,4 +39,7 @@ int popList(ListNode **list){
     free(temp);
     return value;
 }
+
+void
+
 
