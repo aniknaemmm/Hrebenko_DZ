@@ -6,7 +6,7 @@
 
 
 enum flags{chek,chekout};
-
+/**/
 typedef struct Node_{
     int data;
     struct Node_ *link;

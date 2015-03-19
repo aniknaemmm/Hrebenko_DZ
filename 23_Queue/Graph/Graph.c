@@ -1,4 +1,4 @@
-#include "Queue.h"
+#include "Graph.h"
 void addList(Node **list,int data){
 
     Node *p=NULL;
@@ -11,7 +11,7 @@ void addList(Node **list,int data){
     p->link=*list;
     *list=p;
     }
-void printfs(const Node *list){
+    void printfs(const Node *list){
 
     while(list){
         printf("%d ",list->data+1);
@@ -27,5 +27,10 @@ void clears(Node **list){
        *list=(*list)->link;
        free(p);
     }
+
+}
+
+void DFS(){
+
 
 }

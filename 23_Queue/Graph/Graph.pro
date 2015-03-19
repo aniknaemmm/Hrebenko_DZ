@@ -4,11 +4,11 @@ CONFIG -= app_bundle
 CONFIG -= qt
 QMAKE_CFLAGS += -std=c11
 SOURCES += main.c \
-    Queue.c
+        Graph.c\
 
 include(deployment.pri)
 qtcAddDeployment()
 
 HEADERS += \
-    Queue.h
+      Graph.h\
 

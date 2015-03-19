@@ -1,4 +1,4 @@
-#include "Queue.h"
+#include "Graph.h"
 int main(void)
 {
     int allTop,allEdge;
@@ -33,8 +33,10 @@ int main(void)
         }
 
         for(int i=0;i<allTop;i++){
+            printf("%d-",i+1);
             printfs(list[i]);
-            printf("%d\n",i);
+            printf("\n");
+
         }
 
         for(int i=0;i<allTop;i++){
