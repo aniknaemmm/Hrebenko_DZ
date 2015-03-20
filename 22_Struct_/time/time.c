@@ -8,8 +8,7 @@ void enterTime(Time *data){
 }
 void showTime(Time data){
 
-    printf("hours|minut|sec\n"
-           " %03d| %03d|%03d \n",data.hour,data.minut,data.sec);
+    printf(" %02d:%02d:%02d \n",data.hour,data.minut,data.sec);
 }
 
 
