@@ -40,6 +40,46 @@ int popList(ListNode **list){
     return value;
 }
 
-void
+int collNode(ListNode *list){
+    int result=0;
+    ListNode *temp;
+    while(list){
+        temp=list->next;
+        result++;
+        list=temp;
+    }
 
+    return result;
+}
+
+bool chekNullList(ListNode *list){
+    if(list)
+        return true;
+    return false;
+
+}
+
+
+void addNodeToEnd(ListNode **list,int data){
+    ListNode *temp=NULL,*tempList=*list;
+    temp=(ListNode *)malloc(sizeof(ListNode));
+    if(temp==NULL){
+        fprintf(stderr,"error");
+        exit(1);
+    }
+    temp->data=data;
+    temp->next=NULL;
+    if(tempList==NULL){
+        *list=temp;
+    }else{
+        while(tempList->next!= NULL)
+                   tempList = tempList->next;
+               tempList->next = temp;
+           }
+
+           temp= NULL;
+
+
+
+}
 

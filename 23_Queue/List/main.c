@@ -10,9 +10,10 @@ int main(void)
     addList(&head,k);
     addList(&head,k);
     addList(&head,k);
+    addNodeToEnd(&head,k);
     printList(head);
 
-      printf("\nHello World!\n%d\n",popList(&head));
+      printf("\nHello World!\n%d\n",collNode(head));
         printList(head);
     return 0;
 }
