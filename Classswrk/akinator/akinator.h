@@ -28,7 +28,7 @@ struct Node_ *noLink;
 void addNewKnowlege(Node *target,Info newAnimal,Info question,bool rightAnswer);
 Node *goToleaf (Node *root);
 void createNode(Node **node,Info info);
-
+bool chekAnswer();
 
 #endif // AKINATOR_H
 

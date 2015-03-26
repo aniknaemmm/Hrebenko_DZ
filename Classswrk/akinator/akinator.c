@@ -2,6 +2,10 @@
 
 void createNode(Node **node,Info info){
     *node=(Node *)malloc(sizeof(Node));
+    if(*node==NULL){
+        fprintf(stderr,"no memory");
+        exit(-1);
+    }
     if(*node!=NULL){
         (*node)->info=info;
         (*node)->noLink=NULL;
@@ -33,16 +37,30 @@ Node *goToleaf (Node *root){
     Node *p=root;
     while (p->info.type==questionType) {
         printf("%s\n",p->info.string);
-        printf("y/n: ");
-        char answer;
-        scanf(" %c",&answer);
-        if(answer=='y'){
+        if(chekAnswer()){
             p=p->yesLink;
          }else{
             p=p->noLink;
         }
     }
 return p;
+
+
+}
+
+bool chekAnswer(){
+    char answer[256];
+
+    do
+       {
+           printf("Введите да/нет\n");
+           scanf(" %s",answer);
+
+           if(strcmp("да", answer) != 0 && strcmp("нет", answer) != 0)
+               printf("Только да или нет\n");
+       } while(strcmp("да", answer) != 0 && strcmp("нет", answer) != 0);
+
+       return strcmp("да", answer) == 0;
 
 
 }

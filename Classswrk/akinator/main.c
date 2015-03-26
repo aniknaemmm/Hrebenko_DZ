@@ -1,40 +1,55 @@
 #include "akinator.h"
 
 int main(void)
-{   char answ,newAnimal[100],newQuestion[100];
+{   char newAnimal[100],newQuestion[100],chekPravda[100];
+    bool pravda;
     /*FILE *file;
     file=fopen("dataStorage.txt","r");*/
     Node *root=NULL;
     Info catInfo={"КОТ",animalType};
     createNode(&root,catInfo);
-   //Info whaleInfo={"КиТ",animalType};
-   //Info questionInfo={"Оно большое?",questionType};
-    //addNewKnowlege(root,whaleInfo,questionInfo,true);
     Node *target=NULL;
 
+    printf("Будешь  играть?\n");
 
 
-    while(1){
+    while(chekAnswer()){
+          system("clear");
+          target=goToleaf(root);
+          printf("это %s?\n",target->info.string);
 
-            target=goToleaf(root);
-            printf("это %s?",target->info.string);
-            scanf(" %c",&answ);
-            if(answ=='y') printf("molorik");
-            else{
-            Info newAnimalInfo;
-            printf("kakoe givotnoe>>? ");
-            scanf(" %s",newAnimal);
-            strcpy(newAnimalInfo.string,newAnimal);
-            newAnimalInfo.type=animalType;
-            Info newQuestionInfo;
-            printf("kakoi vopros>>?");
-            scanf(" %s",newQuestion);
-            strcpy(newQuestionInfo.string,newQuestion);
-            newQuestionInfo.type=questionType;
-            addNewKnowlege(target,newAnimalInfo,newQuestionInfo,true);
-            target=NULL;
-            }
-        }
+     if(chekAnswer()) printf("Я угадала!\n");
+
+     else{
+          printf("Я не угадала!\n");
+          Info newAnimalInfo;
+          printf("Что это за животное? \n");
+          scanf(" %s",newAnimal);
+          strcpy(newAnimalInfo.string,newAnimal);
+          newAnimalInfo.type=animalType;
+
+          Info newQuestionInfo;
+          printf("задай вопрос/отличие?\n");
+          scanf(" %s",newQuestion);
+          //fflush(stdin);
+          //fgets(newQuestion,254,stdin);
+          strcpy(newQuestionInfo.string,newQuestion);
+          newQuestionInfo.type=questionType;
+         // fflush(stdin);
+          printf("правдивый ответ?\n");
+          scanf(" %s",chekPravda);
+          if(strcmp(chekPravda,"да")==0) pravda=true;
+          else pravda=false;
+
+          addNewKnowlege(target,newAnimalInfo,newQuestionInfo,pravda);
+          target=NULL;
+       }
+
+
+            printf("Будешь ещё играть?\n");
+
+
+     }
 
 
 
