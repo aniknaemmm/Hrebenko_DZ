@@ -35,7 +35,7 @@ Node *goToleaf (Node *root){
         printf("%s\n",p->info.string);
         printf("y/n: ");
         char answer;
-        scanf("%c",&answer);
+        scanf(" %c",&answer);
         if(answer=='y'){
             p=p->yesLink;
          }else{

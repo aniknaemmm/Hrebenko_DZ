@@ -1,10 +1,11 @@
 #ifndef AKINATOR_H
 #define AKINATOR_H
-
+    #include <unistd.h>
     #include <stdio.h>
     #include <stdlib.h>
     #include <stdbool.h>
     #include <assert.h>
+    #include <string.h>
 
     #define MAX_STRING_SIZE 256
 
