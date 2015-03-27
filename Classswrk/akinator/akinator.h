@@ -27,6 +27,7 @@ void addNewKnowlege(Node *target, Info newAnimal, Info question, bool rightAnswe
 Node *goToleaf(Node *root);
 void createNode(Node **node, Info info);
 bool chekAnswer();
+void removeEndOfLine(char *str);
 
 #endif // AKINATOR_H
 

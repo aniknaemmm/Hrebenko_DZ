@@ -73,12 +73,13 @@ Node *goToleaf(Node *root)
 
 bool chekAnswer()
 {
-    char answer[256];
+    char answer[MAX_STRING_SIZE];
 
     do
     {
         printf("Введите да/нет\n");
-        scanf(" %s", answer);
+        fgets(answer, MAX_STRING_SIZE, stdin);
+        removeEndOfLine(answer);
 
         if(strcmp("да", answer) != 0 && strcmp("нет", answer) != 0)
             printf("Только да или нет\n");
@@ -86,6 +87,12 @@ bool chekAnswer()
     while(strcmp("да", answer) != 0 && strcmp("нет", answer) != 0);
 
     return strcmp("да", answer) == 0;
+}
 
+void removeEndOfLine(char *str)
+{
+    int len = strlen(str);
 
+    if(str[len - 1] == '\n')
+        str[len - 1] = '\0';
 }

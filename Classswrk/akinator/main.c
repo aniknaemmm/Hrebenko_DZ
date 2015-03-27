@@ -5,7 +5,7 @@
 
 int main(void)
 {
-    char newAnimal[100], newQuestion[100], chekPravda[100];
+    char newAnimal[MAX_STRING_SIZE], newQuestion[MAX_STRING_SIZE];
     bool pravda;
     /*FILE *file;
     file=fopen("dataStorage.txt","r");*/
@@ -29,23 +29,24 @@ int main(void)
             printf("Я не угадала!\n");
             Info newAnimalInfo;
             printf("Что это за животное? \n");
-            scanf(" %s", newAnimal);
+            //scanf(" %s", newAnimal);
+            fgets(newAnimal, MAX_STRING_SIZE, stdin);
+            removeEndOfLine(newAnimal);
             strcpy(newAnimalInfo.string, newAnimal);
             newAnimalInfo.type = animalType;
 
             Info newQuestionInfo;
             printf("задай вопрос/отличие?\n");
-            scanf(" %s", newQuestion);
+            //scanf(" %s", newQuestion);
             //fflush(stdin);
-            //fgets(newQuestion,254,stdin);
+            fgets(newQuestion, MAX_STRING_SIZE, stdin);
+            removeEndOfLine(newQuestion);
             strcpy(newQuestionInfo.string, newQuestion);
             newQuestionInfo.type = questionType;
             // fflush(stdin);
-            printf("правдивый ответ?\n");
-            scanf(" %s", chekPravda);
 
-            if(strcmp(chekPravda, "да") == 0) pravda = true;
-            else pravda = false;
+            printf("правдивый ответ?\n");
+            pravda = chekAnswer();
 
             addNewKnowlege(target, newAnimalInfo, newQuestionInfo, pravda);
             target = NULL;
