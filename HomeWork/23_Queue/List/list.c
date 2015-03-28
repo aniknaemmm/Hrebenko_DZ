@@ -79,7 +79,5 @@ void addNodeToEnd(ListNode **list,int data){
 
            temp= NULL;
 
-
-
 }
 
