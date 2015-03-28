@@ -96,3 +96,68 @@ void removeEndOfLine(char *str)
     if(str[len - 1] == '\n')
         str[len - 1] = '\0';
 }
+
+
+
+void prefix(Node *curr,FILE *file)
+{
+
+    if (!curr){
+
+        return;
+    }
+
+
+
+    if(file==NULL)
+    {
+        fprintf(stderr, "not founded\n");
+        exit(1);
+    }
+    if(curr->info.type==animalType)
+    {
+        fprintf( file ,"%d %s %d\n",(int)strlen(curr->info.string),curr->info.string,curr->info.type);
+    }
+    else
+    {
+        fprintf( file ,"%d %s %d\n",(int)strlen(curr->info.string),curr->info.string,curr->info.type );
+
+
+    }
+    prefix(curr->yesLink,file);
+    prefix(curr->noLink,file);
+}
+
+void rInfoFile(Node *root)
+{
+    Node *curr=root;
+}
+
+void push(Stack **stack,Node *curr)
+{
+   Stack *temp=(Stack *)malloc(sizeof(Stack));
+   if(temp==NULL){
+       fprintf(stderr,"no memory");
+       exit(-1);
+   }
+   temp->temp=curr;
+   (*stack)->link=*stack;
+   *stack=temp;
+   temp=NULL;
+}
+
+Node *pop(Stack **stack)
+{
+    Stack *tempStack=NULL;
+    Node *tempRoot=NULL;
+    if((*stack)==NULL)
+    {
+        fprintf(stderr,"no stack");
+        exit(-1);
+    }
+    tempStack=*stack;
+    tempRoot=(*stack)->temp;
+    *stack=(*stack)->link;
+    free(tempStack);
+    return tempRoot;
+}

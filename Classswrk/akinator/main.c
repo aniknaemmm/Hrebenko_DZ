@@ -7,11 +7,22 @@ int main(void)
 {
     char newAnimal[MAX_STRING_SIZE], newQuestion[MAX_STRING_SIZE];
     bool pravda;
-    /*FILE *file;
-    file=fopen("dataStorage.txt","r");*/
+    FILE *file=NULL;
     Node *root = NULL;
-    Info catInfo = {"КОТ", animalType};
-    createNode(&root, catInfo);
+
+    file=fopen("../Maxinator.txt","r");
+   // if(file==NULL)
+   // {
+        Info catInfo = {"КОТ", animalType};
+        createNode(&root, catInfo);
+    //}
+   // else
+    //{
+
+    fclose(file);
+    //}
+
+
     Node *target = NULL;
 
     printf("Будешь  играть?\n");
@@ -26,6 +37,8 @@ int main(void)
 
         else
         {
+
+            file = fopen("../Maxinator.txt", "w");
             printf("Я не угадала!\n");
             Info newAnimalInfo;
             printf("Что это за животное? \n");
@@ -49,12 +62,21 @@ int main(void)
             pravda = chekAnswer();
 
             addNewKnowlege(target, newAnimalInfo, newQuestionInfo, pravda);
+            prefix(root,file);
             target = NULL;
+            fclose(file);
         }
 
 
         printf("Будешь ещё играть?\n");
     }
+
+
+
+
+
+
+
 
     return 0;
 }
