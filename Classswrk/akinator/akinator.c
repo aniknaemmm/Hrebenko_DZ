@@ -1,7 +1,6 @@
 #include "akinator.h"
 #include <assert.h>
 #include <string.h>
-#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -107,8 +106,6 @@ void prefix(Node *curr,FILE *file)
         return;
     }
 
-
-
     if(file==NULL)
     {
         fprintf(stderr, "not founded\n");
@@ -122,26 +119,83 @@ void prefix(Node *curr,FILE *file)
     {
         fprintf( file ,"%d %s %d\n",(int)strlen(curr->info.string),curr->info.string,curr->info.type );
 
-
     }
     prefix(curr->yesLink,file);
     prefix(curr->noLink,file);
 }
 
-void rInfoFile(Node *root)
+void rInfoFile(Node **root,FILE *file)
 {
-    Node *curr=root;
+    assert(file);
+    Node *curr;
+    Stack *stack=NULL;
+    int strLength,typeInfo;
+    Info tempInfo;
+    fscanf(file,"%d ",&strLength);
+    char *string=(char *)malloc(strLength*sizeof(char));
+    fgets(string ,strLength+1 ,file);
+    fscanf(file ,"%d\n" ,&typeInfo);
+    tempInfo.type=typeInfo;
+    strcpy(tempInfo.string,string);
+    createNode(&*root,tempInfo);
+    push(&stack,&*root);
+    curr=*root;
+    while(!feof(file))
+    {
+
+        bool chekWetku;
+        //Node *tempNode=NULL;
+        fscanf(file,"%d ",&strLength);
+        char *string=(char *)malloc(strLength*sizeof(char));
+        fgets(string ,strLength+1 ,file);
+        fscanf(file ,"%d\n" ,&typeInfo);
+        tempInfo.type=typeInfo;
+        strcpy(tempInfo.string,string);
+
+        if(tempInfo.type==2)
+        {
+            push(&stack,&curr);
+        }
+        else
+        {   if(curr->info.type==1){
+                curr=pop(&stack);
+                chekWetku=false;}
+        }
+
+
+        addNewNode(&curr,tempInfo,chekWetku);
+        chekWetku=true;
+    }
+
 }
 
-void push(Stack **stack,Node *curr)
+
+void addNewNode(Node **target,Info tempInfo,bool chekWetku)
+{
+    Node *tempTarget=NULL;
+    createNode(&tempTarget,tempInfo);
+    if(chekWetku)
+    {
+        (*target)->yesLink=tempTarget;
+        (*target)=tempTarget;
+    }
+    else
+    {
+        (*target)->noLink=tempTarget;
+        (*target)=tempTarget;
+    }
+
+}
+
+void push(Stack **stack,Node **curr)
 {
    Stack *temp=(Stack *)malloc(sizeof(Stack));
    if(temp==NULL){
        fprintf(stderr,"no memory");
        exit(-1);
    }
-   temp->temp=curr;
-   (*stack)->link=*stack;
+   temp->temp=*curr;
+   temp->link=*stack;
    *stack=temp;
    temp=NULL;
 }

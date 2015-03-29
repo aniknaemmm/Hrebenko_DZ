@@ -35,7 +35,10 @@ void createNode(Node **node, Info info);
 bool chekAnswer();
 void removeEndOfLine(char *str);
 void prefix(Node *curr,FILE *ffd);
-
-
+//-----
+void rInfoFile(Node **root,FILE *file);
+void push(Stack **stack,Node **curr);
+Node *pop(Stack **stack);
+void addNewNode(Node **target,Info tempInfo,bool chekWetku);
 #endif // AKINATOR_H
 

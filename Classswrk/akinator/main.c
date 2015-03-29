@@ -11,16 +11,16 @@ int main(void)
     Node *root = NULL;
 
     file=fopen("../Maxinator.txt","r");
-   // if(file==NULL)
-   // {
+    if(file==NULL)
+    {
         Info catInfo = {"КОТ", animalType};
         createNode(&root, catInfo);
-    //}
-   // else
-    //{
-
-    fclose(file);
-    //}
+    }
+    else
+    {
+        rInfoFile(&root,file);
+        fclose(file);
+    }
 
 
     Node *target = NULL;
@@ -38,11 +38,9 @@ int main(void)
         else
         {
 
-            file = fopen("../Maxinator.txt", "w");
             printf("Я не угадала!\n");
             Info newAnimalInfo;
             printf("Что это за животное? \n");
-            //scanf(" %s", newAnimal);
             fgets(newAnimal, MAX_STRING_SIZE, stdin);
             removeEndOfLine(newAnimal);
             strcpy(newAnimalInfo.string, newAnimal);
@@ -50,18 +48,16 @@ int main(void)
 
             Info newQuestionInfo;
             printf("задай вопрос/отличие?\n");
-            //scanf(" %s", newQuestion);
-            //fflush(stdin);
             fgets(newQuestion, MAX_STRING_SIZE, stdin);
             removeEndOfLine(newQuestion);
             strcpy(newQuestionInfo.string, newQuestion);
             newQuestionInfo.type = questionType;
-            // fflush(stdin);
 
             printf("правдивый ответ?\n");
             pravda = chekAnswer();
 
             addNewKnowlege(target, newAnimalInfo, newQuestionInfo, pravda);
+            file = fopen("../Maxinator.txt", "w");
             prefix(root,file);
             target = NULL;
             fclose(file);

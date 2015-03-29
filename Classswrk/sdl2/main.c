@@ -86,8 +86,8 @@ int main(void)
 
         }
 
-        x=cos(3.1415/2+0.5*sin(10*3.1415*t/180))*SCREENHIGHT/3+SCREENWIDTH/2;
-        y=sin(3.1415/2+0.5*sin(11*3.1415*t/180))*SCREENHIGHT/3+SCREENHIGHT/2;
+        x=cos(3.1415/2+0.5*sin(3.1415*t/180))*SCREENHIGHT/3+SCREENWIDTH/2;
+        y=sin(3.1415/2+0.5*sin(1*3.1415*t/180))*SCREENHIGHT/3+SCREENHIGHT/2;
 
         SDL_SetRenderDrawColor(ren,0x00,0x00,0x00,0xFF);
         SDL_RenderClear(ren);
