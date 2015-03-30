@@ -4,15 +4,15 @@
 #include <stdbool.h>
 #include <SDL2/SDL2_gfxPrimitives.h>
 #include <math.h>
-#define SCREENWIDTH 1280
-#define SCREENHIGHT 1024
+#define SCREENWIDTH 640
+#define SCREENHIGHT 480
 int main(void)
 {
     if(SDL_Init(SDL_INIT_VIDEO)!=0){
         fprintf(stderr,"SDL_Init( Error : %s\n",SDL_GetError());
         exit(1);
     }
-    SDL_Window *win = SDL_CreateWindow("Hello World !",100,100,1280,1024,SDL_WINDOW_SHOWN);
+    SDL_Window *win = SDL_CreateWindow("Hello World !",100,100,SCREENWIDTH,SCREENHIGHT,SDL_WINDOWEVENT_SHOWN);
     if(win==NULL){
         fprintf(stderr,"SDL_CreateWindow Error : %s\n",SDL_GetError());
         exit(1);
@@ -26,7 +26,7 @@ int main(void)
         SDL_Quit();
         exit(1);
     }
-    SDL_Surface *bmp = SDL_LoadBMP("../res/hello.bmp");
+   /* SDL_Surface *bmp = SDL_LoadBMP("../res/hello.bmp");
 
     if(bmp==NULL){
         SDL_DestroyRenderer(ren);
@@ -47,7 +47,7 @@ int main(void)
     }
 
     SDL_RenderClear(ren);
-    SDL_RenderCopy(ren,tex,NULL,NULL);
+    SDL_RenderCopy(ren,tex,NULL,NULL);*/
 
     bool quit =false;
     SDL_Event e;
@@ -86,19 +86,21 @@ int main(void)
 
         }
 
-        x=cos(3.1415/2+0.5*sin(3.1415*t/180))*SCREENHIGHT/3+SCREENWIDTH/2;
-        y=sin(3.1415/2+0.5*sin(1*3.1415*t/180))*SCREENHIGHT/3+SCREENHIGHT/2;
+        x=sin(m*t);
+        x=cos(n*t);
+       /* x=cos(3.1415/2+0.5*sin(3.1415*t/180))*SCREENHIGHT/3+SCREENWIDTH/2;
+        y=sin(3.1415/2+0.5*sin(1*3.1415*t/180))*SCREENHIGHT/3+SCREENHIGHT/2;*/
 
         SDL_SetRenderDrawColor(ren,0x00,0x00,0x00,0xFF);
         SDL_RenderClear(ren);
         SDL_SetRenderDrawColor(ren,0xFF,0xFF,0xFF,0xFF);
-        SDL_RenderDrawLine(ren,x,y,SCREENWIDTH/2,SCREENHIGHT/2);// or Point
+        SDL_RenderDrawPoint(ren,x,y);// or Point
         aacircleRGBA(ren,x,y,20,0xFF,0x7F,0x00,0xFF);
         SDL_RenderPresent(ren);
         ++t;
     }
 
-    SDL_DestroyTexture(tex);
+    //SDL_DestroyTexture(tex);
     SDL_DestroyRenderer(ren);
     SDL_DestroyWindow(win);
     SDL_Quit();

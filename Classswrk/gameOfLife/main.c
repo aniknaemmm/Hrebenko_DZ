@@ -4,15 +4,19 @@
 #include <stdbool.h>
 #include <SDL2/SDL2_gfxPrimitives.h>
 #include <math.h>
-#define SCREENWIDTH 1280
-#define SCREENHIGHT 1024
+#define SCREENWIDTH 640
+#define SCREENHIGHT 480
+
+void control (int **arrey, int *a, int *s);
+void veiw (int **arrey, int x, int y, SDL_Renderer *ren);
+
 int main(void)
 {
     if(SDL_Init(SDL_INIT_VIDEO)!=0){
         fprintf(stderr,"SDL_Init( Error : %s\n",SDL_GetError());
         exit(1);
     }
-    SDL_Window *win = SDL_CreateWindow("Hello World !",100,100,1280,1024,SDL_WINDOW_SHOWN);
+    SDL_Window *win = SDL_CreateWindow("Hello World !",100,100,SCREENWIDTH,SCREENHIGHT,SDL_WINDOW_SHOWN);
     if(win==NULL){
         fprintf(stderr,"SDL_CreateWindow Error : %s\n",SDL_GetError());
         exit(1);
@@ -49,53 +53,17 @@ int main(void)
     SDL_RenderClear(ren);
     SDL_RenderCopy(ren,tex,NULL,NULL);
 
-    bool quit =false;
-    SDL_Event e;
-
-    int x=10,y=10;
-    int t=0; //vremia
-    while(!quit){
-        while (SDL_PollEvent(&e)!=0) {
-           if(e.type == SDL_QUIT)  quit = true;
-           if(e.type == SDL_KEYDOWN){
-               SDL_KeyboardEvent kEvent=e.key;
-               //if(kEvent.keysym.scancode==SDL_SCANCODE_A) printf("A\n");
-               if(kEvent.keysym.scancode==SDL_SCANCODE_A){
-                   x=(x-5+SCREENWIDTH)%SCREENWIDTH;
-                   //--x;
-               }
-               if(kEvent.keysym.scancode==SDL_SCANCODE_D){
-                   x=(x+5+SCREENWIDTH)%SCREENWIDTH;
-                   //--x;
-               }
-               if(kEvent.keysym.scancode==SDL_SCANCODE_W){
-                   y=(y-5+SCREENHIGHT)%SCREENHIGHT;
-                   //--x;
-               }
-               if(kEvent.keysym.scancode==SDL_SCANCODE_S){
-                   y=(y+5+SCREENHIGHT)%SCREENHIGHT;
-                   //--x;
-               }
-               if(kEvent.keysym.scancode==SDL_SCANCODE_K){
-
-               }
-
-           }
-           if(e.type == SDL_MOUSEBUTTONDOWN) quit =true;
-
-
-        }
-
-        x=cos(3.1415/2+0.5*sin(3.1415*t/180))*SCREENHIGHT/3+SCREENWIDTH/2;
-        y=sin(3.1415/2+0.5*sin(1*3.1415*t/180))*SCREENHIGHT/3+SCREENHIGHT/2;
-
-        SDL_SetRenderDrawColor(ren,0x00,0x00,0x00,0xFF);
-        SDL_RenderClear(ren);
-        SDL_SetRenderDrawColor(ren,0xFF,0xFF,0xFF,0xFF);
-        SDL_RenderDrawLine(ren,x,y,SCREENWIDTH/2,SCREENHIGHT/2);// or Point
-        aacircleRGBA(ren,x,y,20,0xFF,0x7F,0x00,0xFF);
-        SDL_RenderPresent(ren);
-        ++t;
+    int x=0,y=0;
+    int **arrey=NULL;
+    arrey=(int**)malloc(SCREENHIGHT/10 *sizeof(int*));
+    for (int i=0; i<SCREENHIGHT/10; i++)
+    {
+        arrey[i]=malloc(SCREENWIDTH/10 *sizeof(int));
+    }
+    for (int i=0; i<7; i++)
+    {
+        control(arrey, &x, &y);
+        veiw(arrey, x, y, ren);
     }
 
     SDL_DestroyTexture(tex);
@@ -106,3 +74,84 @@ int main(void)
      return 0;
 }
 
+void control (int **arrey, int *a, int *s)
+{
+
+    int x=*a, y=*s;
+    SDL_Event e;
+    bool quit =false;
+
+    while(SDL_WaitEvent (&e)==0)
+    {
+        while (SDL_PollEvent(&e)!=0) {
+           if(e.type == SDL_QUIT)  quit = true;
+           if(e.type == SDL_KEYDOWN){
+               SDL_KeyboardEvent kEvent=e.key;
+               //if(kEvent.keysym.scancode==SDL_SCANCODE_A) printf("A\n");
+               if(kEvent.keysym.scancode==SDL_SCANCODE_A){
+                   x=(x-10+SCREENWIDTH)%SCREENWIDTH;
+                   //--x;
+               }
+               if(kEvent.keysym.scancode==SDL_SCANCODE_D){
+                   x=(x+10+SCREENWIDTH)%SCREENWIDTH;
+                   //--x;
+               }
+               if(kEvent.keysym.scancode==SDL_SCANCODE_W){
+                   y=(y-10+SCREENHIGHT)%SCREENHIGHT;
+                   //--x;
+               }
+               if(kEvent.keysym.scancode==SDL_SCANCODE_S){
+                   y=(y+10+SCREENHIGHT)%SCREENHIGHT;
+                   //--x;
+               }
+               if(kEvent.keysym.scancode==SDL_SCANCODE_K){
+                    x=0;
+                    y=0;
+               }
+               if(kEvent.keysym.scancode==SDL_SCANCODE_SPACE){
+
+                    if (arrey[x/10][y/10]==1)
+                   arrey[x/10][y/10]=0;
+                    if (arrey[x/10][y/10]==0)
+                   arrey[x/10][y/10]=1;
+               }
+
+
+           }
+        }
+
+    }
+
+}
+
+void veiw (int **arrey, int x, int y, SDL_Renderer *ren)
+{
+    SDL_Rect squr;
+        squr.h=10;
+        squr.w=10;
+
+
+        for (int i=0; i<SCREENHIGHT/10; ++i)
+        {
+            for (int j=0; j<SCREENWIDTH/10; ++j)
+            {
+                if(arrey[i][j]==1)
+                {
+                    squr.y=j*10;
+                    squr.x=i*10;
+                    SDL_SetRenderDrawColor(ren,0x00,0xFF,0x00,0xFF);
+                    SDL_RenderFillRect(ren, &squr);
+                }
+            }
+        }
+        squr.y=y;
+        squr.x=x;
+
+
+
+        SDL_SetRenderDrawColor(ren,0x00,0x00,0x00,0xFF);
+        SDL_RenderClear(ren);
+        SDL_SetRenderDrawColor(ren,0xFF,0x00,0x00,0xFF);
+        SDL_RenderFillRect(ren, &squr);
+        SDL_RenderPresent(ren);
+}
