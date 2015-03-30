@@ -1,4 +1,5 @@
 build-**-Debug/
+*Relesase/
 *.exe
 *.obj
 *.save
