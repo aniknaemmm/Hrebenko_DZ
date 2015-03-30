@@ -152,19 +152,24 @@ void rInfoFile(Node **root,FILE *file)
         tempInfo.type=typeInfo;
         strcpy(tempInfo.string,string);
 
-        if(tempInfo.type==2)
+        if(curr->info.type==animalType)
         {
-            push(&stack,&curr);
-        }
-        else
-        {   if(curr->info.type==1){
                 curr=pop(&stack);
-                chekWetku=false;}
         }
+
+        if(curr->yesLink!=NULL)
+            chekWetku=false;
+        else
+            chekWetku=true;
 
 
         addNewNode(&curr,tempInfo,chekWetku);
         chekWetku=true;
+
+        if(tempInfo.type==2)
+        {
+            push(&stack,&curr);
+        }
     }
 
 }
