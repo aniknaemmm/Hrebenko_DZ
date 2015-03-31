@@ -7,8 +7,8 @@
 #define SCREENWIDTH 640
 #define SCREENHIGHT 480
 
-void control (int **arrey, int *a, int *s);
-void veiw (int **arrey, int x, int y, SDL_Renderer *ren);
+void control (int **array, int *xPosition, int *yPosition,SDL_Renderer *ren);
+void veiw (int **array, int x, int y, SDL_Renderer *ren);
 
 int main(void)
 {
@@ -54,17 +54,21 @@ int main(void)
     SDL_RenderCopy(ren,tex,NULL,NULL);
 
     int x=0,y=0;
-    int **arrey=NULL;
-    arrey=(int**)malloc(SCREENHIGHT/10 *sizeof(int*));
+    int **array=NULL;
+    array=(int**)malloc(SCREENHIGHT/10 *sizeof(int*));
     for (int i=0; i<SCREENHIGHT/10; i++)
+        array[i]=(int *)malloc(SCREENWIDTH/10 *sizeof(int));
+    for (int i=0; i<SCREENHIGHT/10; ++i)
     {
-        arrey[i]=malloc(SCREENWIDTH/10 *sizeof(int));
+        for (int j=0; j<SCREENWIDTH/10; ++j)
+           array[i][j]=0;
     }
-    for (int i=0; i<7; i++)
-    {
-        control(arrey, &x, &y);
-        veiw(arrey, x, y, ren);
-    }
+
+
+
+        control(array, &x, &y,ren);
+
+
 
     SDL_DestroyTexture(tex);
     SDL_DestroyRenderer(ren);
@@ -74,14 +78,14 @@ int main(void)
      return 0;
 }
 
-void control (int **arrey, int *a, int *s)
+void control (int **array, int *xPosition, int *yPosition,SDL_Renderer *ren)
 {
 
-    int x=*a, y=*s;
+    int x=*xPosition, y=*yPosition;
     SDL_Event e;
     bool quit =false;
 
-    while(SDL_WaitEvent (&e)==0)
+    while(!quit)
     {
         while (SDL_PollEvent(&e)!=0) {
            if(e.type == SDL_QUIT)  quit = true;
@@ -89,19 +93,19 @@ void control (int **arrey, int *a, int *s)
                SDL_KeyboardEvent kEvent=e.key;
                //if(kEvent.keysym.scancode==SDL_SCANCODE_A) printf("A\n");
                if(kEvent.keysym.scancode==SDL_SCANCODE_A){
-                   x=(x-10+SCREENWIDTH)%SCREENWIDTH;
+                   x=((x-1+SCREENWIDTH)/10)%(SCREENWIDTH/10);
                    //--x;
                }
                if(kEvent.keysym.scancode==SDL_SCANCODE_D){
-                   x=(x+10+SCREENWIDTH)%SCREENWIDTH;
+                   x=(x+1)%(SCREENWIDTH/10);
                    //--x;
                }
                if(kEvent.keysym.scancode==SDL_SCANCODE_W){
-                   y=(y-10+SCREENHIGHT)%SCREENHIGHT;
+                   y=(y-1+SCREENHIGHT/10)%(SCREENHIGHT/10);
                    //--x;
                }
                if(kEvent.keysym.scancode==SDL_SCANCODE_S){
-                   y=(y+10+SCREENHIGHT)%SCREENHIGHT;
+                   y=(y+1)%(SCREENHIGHT/10);
                    //--x;
                }
                if(kEvent.keysym.scancode==SDL_SCANCODE_K){
@@ -110,48 +114,48 @@ void control (int **arrey, int *a, int *s)
                }
                if(kEvent.keysym.scancode==SDL_SCANCODE_SPACE){
 
-                    if (arrey[x/10][y/10]==1)
-                   arrey[x/10][y/10]=0;
-                    if (arrey[x/10][y/10]==0)
-                   arrey[x/10][y/10]=1;
+                    if (array[y][x]==1)
+                   array[y][x]=0;
+                    if (array[y][x]==0)
+                   array[y][x]=1;
                }
-
 
            }
         }
+        veiw(array, x, y, ren);
+
 
     }
 
 }
 
-void veiw (int **arrey, int x, int y, SDL_Renderer *ren)
+void veiw (int **array, int x, int y, SDL_Renderer *ren)
 {
-    SDL_Rect squr;
-        squr.h=10;
-        squr.w=10;
+   SDL_Rect squr;
+   squr.h=10;
+   squr.w=10;
 
-
+   SDL_SetRenderDrawColor(ren, 0x00, 0x00, 0x00, 0xFF);
+   SDL_RenderClear(ren);
         for (int i=0; i<SCREENHIGHT/10; ++i)
         {
             for (int j=0; j<SCREENWIDTH/10; ++j)
             {
-                if(arrey[i][j]==1)
+                if(array[i][j]==1)
                 {
-                    squr.y=j*10;
-                    squr.x=i*10;
+                    squr.y=i*10;
+                    squr.x=j*10;
                     SDL_SetRenderDrawColor(ren,0x00,0xFF,0x00,0xFF);
                     SDL_RenderFillRect(ren, &squr);
                 }
             }
         }
-        squr.y=y;
-        squr.x=x;
+       squr.y=y*10;
+       squr.x=x*10;
 
-
-
-        SDL_SetRenderDrawColor(ren,0x00,0x00,0x00,0xFF);
-        SDL_RenderClear(ren);
         SDL_SetRenderDrawColor(ren,0xFF,0x00,0x00,0xFF);
         SDL_RenderFillRect(ren, &squr);
         SDL_RenderPresent(ren);
 }
+
+
