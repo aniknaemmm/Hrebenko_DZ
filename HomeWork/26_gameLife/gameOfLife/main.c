@@ -198,7 +198,7 @@ void logic(int **array,SDL_Renderer *ren){
             array[i][j]=arrayTemp[i][j];
         }
     }
-    SDL_Delay(100);
+    SDL_Delay(50);
     veiw(array,screenWidth+1,0,ren);
  }
 
