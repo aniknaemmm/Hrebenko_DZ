@@ -63,7 +63,7 @@ void control (int **array, int *xPosition, int *yPosition,SDL_Renderer *ren)
     int x=*xPosition, y=*yPosition;
     SDL_Event e;
     bool quit =false;
-    veiw(array,x,y,ren);
+    //veiw(array,x,y,ren);
     while(!quit){
            while (SDL_PollEvent(&e)!=0) {
            if(e.type == SDL_KEYDOWN){
