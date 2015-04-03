@@ -150,7 +150,7 @@ void logic(int **array,SDL_Renderer *ren){
         }
     }
 
- while(1){
+/* while(1){
      int screenWidth=SCREENWIDTH/10;
      int screenHight=SCREENHIGHT/10;
     int chekosition=0;
@@ -200,6 +200,6 @@ void logic(int **array,SDL_Renderer *ren){
     }
     SDL_Delay(100);
     veiw(array,screenWidth+1,0,ren);
- }
+ }*/
 
 }
