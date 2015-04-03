@@ -145,7 +145,8 @@ void veiw (int **array, int x, int y, SDL_Renderer *ren)
                 {
                     squr.y=i*10;
                     squr.x=j*10;
-                    SDL_SetRenderDrawColor(ren,0x00,0xFF,0x00,0xFF);
+                    
+
                     SDL_RenderFillRect(ren, &squr);
                 }
             }

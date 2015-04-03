@@ -10,6 +10,8 @@
 void control (int **array, int *x, int *y, SDL_Renderer *ren);
 void veiw (int **array, int x, int y, SDL_Renderer *ren);
 void logic(int **array,SDL_Renderer *ren);
+bool playGameLife(int **array,SDL_Renderer *ren);
+
 int main(void)
 {
     if(SDL_Init(SDL_INIT_VIDEO)!=0){
@@ -46,9 +48,9 @@ int main(void)
             }
         }
 
+        control(array,&x,&y,ren);
 
-       control(array, &x, &y,ren);
-       logic(array,ren);
+       playGameLife(array,ren);
 
     SDL_DestroyRenderer(ren);
     SDL_DestroyWindow(win);
@@ -63,7 +65,7 @@ void control (int **array, int *xPosition, int *yPosition,SDL_Renderer *ren)
     int x=*xPosition, y=*yPosition;
     SDL_Event e;
     bool quit =false;
-    //veiw(array,x,y,ren);
+    veiw(array,x,y,ren);
     while(!quit){
            while (SDL_PollEvent(&e)!=0) {
            if(e.type == SDL_KEYDOWN){
@@ -98,6 +100,7 @@ void control (int **array, int *xPosition, int *yPosition,SDL_Renderer *ren)
                }
                if(kEvent.keysym.scancode==SDL_SCANCODE_C)
                     quit=true;
+
           veiw(array,x,y,ren);
          }
       }
@@ -134,9 +137,9 @@ void veiw (int **array, int x, int y, SDL_Renderer *ren)
         SDL_RenderPresent(ren);
 }
 
-void logic(int **array,SDL_Renderer *ren){
 
 
+bool playGameLife(int **array,SDL_Renderer *ren){
     int **arrayTemp=NULL;
     arrayTemp=(int**)malloc((SCREENHIGHT/10) *sizeof(int*));
     for (int i=0; i<SCREENHIGHT/10; i++)
@@ -149,57 +152,85 @@ void logic(int **array,SDL_Renderer *ren){
             arrayTemp[i][j]=0;
         }
     }
+    int speed=100,t;
+    SDL_Event e;
+    bool quit=false;
+    while(!quit){
+        while(SDL_PollEvent(&e)){
+             switch (e.type)
+             {
+                case SDL_QUIT:
+                quit=true;
+                break;
+             }
 
- while(1){
-     int screenWidth=SCREENWIDTH/10;
-     int screenHight=SCREENHIGHT/10;
-    int chekosition=0;
-    for (int i=0; i<SCREENHIGHT/10; ++i)
-    {
-        for (int j=0; j<SCREENWIDTH/10; ++j)
-        {
-            for (int vi=-1; vi<2; ++vi)
-            {
-                for (int vj=-1; vj<2; ++vj)
-                {
-                  if(array[(i+vi+screenHight)%screenHight][(j+vj+screenWidth)%screenWidth]==1&&!(vi==0&&vj==0))
-                  {
-                      chekosition++;
-                  }
+             if(e.type == SDL_KEYDOWN){
+                 SDL_KeyboardEvent kEvent=e.key;
+                 if(kEvent.keysym.scancode==SDL_SCANCODE_W)
+                 {
 
-                }
+                     speed*=10;
+                 }
+                 if(kEvent.keysym.scancode==SDL_SCANCODE_D)
+                 {
+
+                     speed/=10;
+                 }
+
             }
-            if(array[i][j]==1){
-                if((chekosition==2||chekosition==3))
-                {
-                    arrayTemp[i][j]=1;
-                }
-                else
-                {
-                    arrayTemp[i][j]=0;
-                }
-            }
-            else
-            {
-                if(chekosition==3)
-                {
-                    arrayTemp[i][j]=1;
-                }
-                else arrayTemp[i][j]=0;
-            }
-            chekosition=0;
-        }
+       }
+       int screenWidth=SCREENWIDTH/10;
+       int screenHight=SCREENHIGHT/10;
+       int chekosition=0;
+       for (int i=0; i<SCREENHIGHT/10; ++i)
+       {
+           for (int j=0; j<SCREENWIDTH/10; ++j)
+           {
+               for (int vi=-1; vi<2; ++vi)
+               {
+                   for (int vj=-1; vj<2; ++vj)
+                   {
+                     if(array[(i+vi+screenHight)%screenHight][(j+vj+screenWidth)%screenWidth]==1&&!(vi==0&&vj==0))
+                     {
+                         chekosition++;
+                     }
+
+                   }
+               }
+               if(array[i][j]==1){
+                   if((chekosition==2||chekosition==3))
+                   {
+                       arrayTemp[i][j]=1;
+                   }
+                   else
+                   {
+                       arrayTemp[i][j]=0;
+                   }
+               }
+               else
+               {
+                   if(chekosition==3)
+                   {
+                       arrayTemp[i][j]=1;
+                   }
+                   else arrayTemp[i][j]=0;
+               }
+               chekosition=0;
+           }
+       }
+
+       for (int i=0; i<SCREENHIGHT/10; ++i)
+       {
+           for (int j=0; j<SCREENWIDTH/10; ++j)
+           {
+               array[i][j]=arrayTemp[i][j];
+           }
+       }
+       SDL_Delay(speed);
+       veiw(array,screenWidth+1,0,ren);
+
     }
 
-    for (int i=0; i<SCREENHIGHT/10; ++i)
-    {
-        for (int j=0; j<SCREENWIDTH/10; ++j)
-        {
-            array[i][j]=arrayTemp[i][j];
-        }
-    }
-    SDL_Delay(100);
-    veiw(array,screenWidth+1,0,ren);
- }
+    return true;
 
 }
