@@ -177,6 +177,37 @@ bool playGameLife(int **array,SDL_Renderer *ren){
                      speed/=10;
                  }
 
+<<<<<<< HEAD
+=======
+/* while(1){
+     int screenWidth=SCREENWIDTH/10;
+     int screenHight=SCREENHIGHT/10;
+    int chekosition=0;
+    for (int i=0; i<SCREENHIGHT/10; ++i)
+    {
+        for (int j=0; j<SCREENWIDTH/10; ++j)
+        {
+            for (int vi=-1; vi<2; ++vi)
+            {
+                for (int vj=-1; vj<2; ++vj)
+                {
+                  if(array[(i+vi+screenHight)%screenHight][(j+vj+screenWidth)%screenWidth]==1&&!(vi==0&&vj==0))
+                  {
+                      chekosition++;
+                  }
+
+                }
+            }
+            if(array[i][j]==1){
+                if((chekosition==2||chekosition==3))
+                {
+                    arrayTemp[i][j]=1;
+                }
+                else
+                {
+                    arrayTemp[i][j]=0;
+                }
+>>>>>>> e1ccba34b6c2908697a06a48dbcc358d3f85e7b9
             }
        }
        int screenWidth=SCREENWIDTH/10;
@@ -230,7 +261,13 @@ bool playGameLife(int **array,SDL_Renderer *ren){
        veiw(array,screenWidth+1,0,ren);
 
     }
+<<<<<<< HEAD
 
     return true;
+=======
+    SDL_Delay(100);
+    veiw(array,screenWidth+1,0,ren);
+ }*/
+>>>>>>> e1ccba34b6c2908697a06a48dbcc358d3f85e7b9
 
 }
