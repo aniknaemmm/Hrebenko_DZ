@@ -10,7 +10,7 @@
 void control (int **array, int *x, int *y, SDL_Renderer *ren);
 void veiw (int **array, int x, int y, SDL_Renderer *ren);
 void logic(int **array,SDL_Renderer *ren);
-bool playGameLife(int **array,SDL_Renderer *ren);
+void freeMemory(int **array);
 
 int main(void)
 {
@@ -40,22 +40,23 @@ int main(void)
     for (int i=0; i<SCREENHIGHT/10; i++)
                 array[i]=(int *)malloc((SCREENWIDTH/10)*sizeof(int));
 
-        for (int i=0; i<SCREENHIGHT/10; ++i)
-        {
-            for (int j=0; j<SCREENWIDTH/10; ++j)
-            {
-                array[i][j]=0;
-            }
-        }
+    for (int i=0; i<SCREENHIGHT/10; ++i)
+    {
+       for (int j=0; j<SCREENWIDTH/10; ++j)
+       {
+            array[i][j]=0;
+       }
+    }
 
-        control(array,&x,&y,ren);
+    veiw(array,0,0,ren);
+    control(array, &x, &y,ren);
+    logic(array,ren);
 
-       playGameLife(array,ren);
 
     SDL_DestroyRenderer(ren);
     SDL_DestroyWindow(win);
     SDL_Quit();
-
+    freeMemory(array);
      return 0;
 }
 
@@ -65,10 +66,19 @@ void control (int **array, int *xPosition, int *yPosition,SDL_Renderer *ren)
     int x=*xPosition, y=*yPosition;
     SDL_Event e;
     bool quit =false;
-    veiw(array,x,y,ren);
+    //veiw(array,x,y,ren);
     while(!quit){
            while (SDL_PollEvent(&e)!=0) {
-           if(e.type == SDL_KEYDOWN){
+           //if(e.type == SDL_QUIT)  quit = true;
+           if(e.type == SDL_MOUSEBUTTONDOWN)
+           {
+               SDL_MouseButtonEvent mEvent=e.button;
+               array[mEvent.y/10][mEvent.x/10]+=1;
+               array[mEvent.y/10][mEvent.x/10]=array[mEvent.y/10][mEvent.x/10]==2?0:1;
+
+           }
+           if(e.type == SDL_KEYDOWN)
+           {
                SDL_KeyboardEvent kEvent=e.key;
                if(kEvent.keysym.scancode==SDL_SCANCODE_A)
                {
@@ -93,16 +103,13 @@ void control (int **array, int *xPosition, int *yPosition,SDL_Renderer *ren)
                }
                if(kEvent.keysym.scancode==SDL_SCANCODE_SPACE)
                {
-                    if (array[y][x]==1)
-                        array[y][x]=0;
-                    if (array[y][x]==0)
-                        array[y][x]=1;
+                   array[y][x]+=1;
+                   array[y][x]=array[y][x]==2?0:1;
                }
                if(kEvent.keysym.scancode==SDL_SCANCODE_C)
                     quit=true;
-
-          veiw(array,x,y,ren);
          }
+         veiw(array,x,y,ren);
       }
    }
 }
@@ -137,9 +144,8 @@ void veiw (int **array, int x, int y, SDL_Renderer *ren)
         SDL_RenderPresent(ren);
 }
 
+void logic(int **array,SDL_Renderer *ren){
 
-
-bool playGameLife(int **array,SDL_Renderer *ren){
     int **arrayTemp=NULL;
     arrayTemp=(int**)malloc((SCREENHIGHT/10) *sizeof(int*));
     for (int i=0; i<SCREENHIGHT/10; i++)
@@ -152,37 +158,39 @@ bool playGameLife(int **array,SDL_Renderer *ren){
             arrayTemp[i][j]=0;
         }
     }
-    int speed=100,t;
+
+
+    int screenWidth=SCREENWIDTH/10;
+    int screenHight=SCREENHIGHT/10;
+    int chekosition=0;
+    int speed=500; //speed animation
     SDL_Event e;
     bool quit=false;
     while(!quit){
-        while(SDL_PollEvent(&e)){
-             switch (e.type)
-             {
-                case SDL_QUIT:
-                quit=true;
-                break;
-             }
+         while (SDL_PollEvent(&e)!=0) {
+            if(e.type == SDL_QUIT)  quit = true;
+            if(e.type == SDL_MOUSEBUTTONDOWN)
+            {
+                SDL_MouseButtonEvent mEvent=e.button;
+                array[mEvent.y/10][mEvent.x/10]+=1;
+                array[mEvent.y/10][mEvent.x/10]=array[mEvent.y/10][mEvent.x/10]==2?0:1;
+                veiw(array,screenWidth+1,0,ren);
+            }
+            if(e.type == SDL_KEYDOWN){
+            SDL_KeyboardEvent kEvent=e.key;
+            if(kEvent.keysym.scancode==SDL_SCANCODE_A)
+            {
+                if(speed!=0)
+                speed-=50;
+            }
+            if(kEvent.keysym.scancode==SDL_SCANCODE_S)
+            {
+                if(speed!=500)
+                    speed+=50;
+            }
 
-             if(e.type == SDL_KEYDOWN){
-                 SDL_KeyboardEvent kEvent=e.key;
-                 if(kEvent.keysym.scancode==SDL_SCANCODE_W)
-                 {
-
-                     speed*=10;
-                 }
-                 if(kEvent.keysym.scancode==SDL_SCANCODE_D)
-                 {
-
-                     speed/=10;
-                 }
-
-<<<<<<< HEAD
-=======
-/* while(1){
-     int screenWidth=SCREENWIDTH/10;
-     int screenHight=SCREENHIGHT/10;
-    int chekosition=0;
+            }
+         }
     for (int i=0; i<SCREENHIGHT/10; ++i)
     {
         for (int j=0; j<SCREENWIDTH/10; ++j)
@@ -207,67 +215,39 @@ bool playGameLife(int **array,SDL_Renderer *ren){
                 {
                     arrayTemp[i][j]=0;
                 }
->>>>>>> e1ccba34b6c2908697a06a48dbcc358d3f85e7b9
             }
-       }
-       int screenWidth=SCREENWIDTH/10;
-       int screenHight=SCREENHIGHT/10;
-       int chekosition=0;
-       for (int i=0; i<SCREENHIGHT/10; ++i)
-       {
-           for (int j=0; j<SCREENWIDTH/10; ++j)
-           {
-               for (int vi=-1; vi<2; ++vi)
-               {
-                   for (int vj=-1; vj<2; ++vj)
-                   {
-                     if(array[(i+vi+screenHight)%screenHight][(j+vj+screenWidth)%screenWidth]==1&&!(vi==0&&vj==0))
-                     {
-                         chekosition++;
-                     }
-
-                   }
-               }
-               if(array[i][j]==1){
-                   if((chekosition==2||chekosition==3))
-                   {
-                       arrayTemp[i][j]=1;
-                   }
-                   else
-                   {
-                       arrayTemp[i][j]=0;
-                   }
-               }
-               else
-               {
-                   if(chekosition==3)
-                   {
-                       arrayTemp[i][j]=1;
-                   }
-                   else arrayTemp[i][j]=0;
-               }
-               chekosition=0;
-           }
-       }
-
-       for (int i=0; i<SCREENHIGHT/10; ++i)
-       {
-           for (int j=0; j<SCREENWIDTH/10; ++j)
-           {
-               array[i][j]=arrayTemp[i][j];
-           }
-       }
-       SDL_Delay(speed);
-       veiw(array,screenWidth+1,0,ren);
-
+            else
+            {
+                if(chekosition==3)
+                {
+                    arrayTemp[i][j]=1;
+                }
+                else arrayTemp[i][j]=0;
+            }
+            chekosition=0;
+        }
     }
-<<<<<<< HEAD
 
-    return true;
-=======
-    SDL_Delay(100);
+    for (int i=0; i<SCREENHIGHT/10; ++i)
+    {
+        for (int j=0; j<SCREENWIDTH/10; ++j)
+        {
+            array[i][j]=arrayTemp[i][j];
+        }
+    }
+    SDL_Delay(speed);
     veiw(array,screenWidth+1,0,ren);
- }*/
->>>>>>> e1ccba34b6c2908697a06a48dbcc358d3f85e7b9
-
+   }
+    freeMemory(arrayTemp);
 }
+
+void freeMemory(int **array){
+    for(int i=0;i<SCREENHIGHT/10;i++)
+    {
+        free(array[i]);
+        array[i]=NULL;
+    }
+    free(array);
+    array=NULL;
+}
+
