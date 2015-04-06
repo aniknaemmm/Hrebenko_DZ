@@ -10,11 +10,7 @@
 void control (int **array, int *x, int *y, SDL_Renderer *ren);
 void veiw (int **array, int x, int y, SDL_Renderer *ren);
 void logic(int **array,SDL_Renderer *ren);
-<<<<<<< HEAD:HomeWork/26_gameLife/gameOfLife/main.c
-bool playGameLife(int **array,SDL_Renderer *ren);
-=======
 void freeMemory(int **array);
->>>>>>> 515052e322fa2605b35ac7130d17b496fd2b0484:HomeWork/021_gameLife/gameOfLife/main.c
 
 int main(void)
 {
@@ -56,11 +52,6 @@ int main(void)
     control(array, &x, &y,ren);
     logic(array,ren);
 
-<<<<<<< HEAD:HomeWork/26_gameLife/gameOfLife/main.c
-       control(array, &x, &y,ren);
-       playGameLife(array,ren);
-=======
->>>>>>> 515052e322fa2605b35ac7130d17b496fd2b0484:HomeWork/021_gameLife/gameOfLife/main.c
 
     SDL_DestroyRenderer(ren);
     SDL_DestroyWindow(win);
@@ -117,11 +108,6 @@ void control (int **array, int *xPosition, int *yPosition,SDL_Renderer *ren)
                }
                if(kEvent.keysym.scancode==SDL_SCANCODE_C)
                     quit=true;
-<<<<<<< HEAD:HomeWork/26_gameLife/gameOfLife/main.c
-
-          veiw(array,x,y,ren);
-=======
->>>>>>> 515052e322fa2605b35ac7130d17b496fd2b0484:HomeWork/021_gameLife/gameOfLife/main.c
          }
          veiw(array,x,y,ren);
       }
@@ -160,48 +146,6 @@ void veiw (int **array, int x, int y, SDL_Renderer *ren)
 
 void logic(int **array,SDL_Renderer *ren){
 
-<<<<<<< HEAD:HomeWork/26_gameLife/gameOfLife/main.c
-
-    SDL_Event e;
-    bool quit=false,play=true;
-    while(!quit){
-        while(SDL_PollEvent(&e)){
-            if(e.type == SDL_QUIT)  quit = true;
-                if(e.type == SDL_KEYDOWN){
-                    SDL_KeyboardEvent kEvent=e.key;
-                    if(kEvent.keysym.scancode==SDL_SCANCODE_P){
-                            while(play){
-                                play=playGameLife()
-                            }
-                    }
-                    if(kEvent.keysym.scancode==SDL_SCANCODE_E){
-
-                    }
-                    if(kEvent.keysym.scancode==SDL_SCANCODE_W){
-
-                    }
-                    if(kEvent.keysym.scancode==SDL_SCANCODE_S){
-
-                    }
-                    if(kEvent.keysym.scancode==SDL_SCANCODE_K){
-
-                    }
-                }
-                if(e.type == SDL_MOUSEBUTTONDOWN) quit =true;
-        }
-    }
-
-
-
-
-
-
-
-}
-
-bool playGameLife(int **array,SDL_Renderer *ren){
-=======
->>>>>>> 515052e322fa2605b35ac7130d17b496fd2b0484:HomeWork/021_gameLife/gameOfLife/main.c
     int **arrayTemp=NULL;
     arrayTemp=(int**)malloc((SCREENHIGHT/10) *sizeof(int*));
     for (int i=0; i<SCREENHIGHT/10; i++)
@@ -215,34 +159,6 @@ bool playGameLife(int **array,SDL_Renderer *ren){
         }
     }
 
-<<<<<<< HEAD:HomeWork/26_gameLife/gameOfLife/main.c
-    SDL_Event e;
-    bool quit=false;
-    while(!quit){
-        while(SDL_PollEvent(&e)){
-             switch (e.type)
-             {
-                case SDL_QUIT:
-                quit=true;
-                break;
-             }
-       }
-       int screenWidth=SCREENWIDTH/10;
-       int screenHight=SCREENHIGHT/10;
-       int chekosition=0;
-       for (int i=0; i<SCREENHIGHT/10; ++i)
-       {
-           for (int j=0; j<SCREENWIDTH/10; ++j)
-           {
-               for (int vi=-1; vi<2; ++vi)
-               {
-                   for (int vj=-1; vj<2; ++vj)
-                   {
-                     if(array[(i+vi+screenHight)%screenHight][(j+vj+screenWidth)%screenWidth]==1&&!(vi==0&&vj==0))
-                     {
-                         chekosition++;
-                     }
-=======
 
     int screenWidth=SCREENWIDTH/10;
     int screenHight=SCREENHIGHT/10;
@@ -287,53 +203,43 @@ bool playGameLife(int **array,SDL_Renderer *ren){
                   {
                       chekosition++;
                   }
->>>>>>> 515052e322fa2605b35ac7130d17b496fd2b0484:HomeWork/021_gameLife/gameOfLife/main.c
 
-                   }
-               }
-               if(array[i][j]==1){
-                   if((chekosition==2||chekosition==3))
-                   {
-                       arrayTemp[i][j]=1;
-                   }
-                   else
-                   {
-                       arrayTemp[i][j]=0;
-                   }
-               }
-               else
-               {
-                   if(chekosition==3)
-                   {
-                       arrayTemp[i][j]=1;
-                   }
-                   else arrayTemp[i][j]=0;
-               }
-               chekosition=0;
-           }
-       }
-
-       for (int i=0; i<SCREENHIGHT/10; ++i)
-       {
-           for (int j=0; j<SCREENWIDTH/10; ++j)
-           {
-               array[i][j]=arrayTemp[i][j];
-           }
-       }
-       SDL_Delay(50);
-       veiw(array,screenWidth+1,0,ren);
-
+                }
+            }
+            if(array[i][j]==1){
+                if((chekosition==2||chekosition==3))
+                {
+                    arrayTemp[i][j]=1;
+                }
+                else
+                {
+                    arrayTemp[i][j]=0;
+                }
+            }
+            else
+            {
+                if(chekosition==3)
+                {
+                    arrayTemp[i][j]=1;
+                }
+                else arrayTemp[i][j]=0;
+            }
+            chekosition=0;
+        }
     }
-<<<<<<< HEAD:HomeWork/26_gameLife/gameOfLife/main.c
 
-    return true;
-=======
+    for (int i=0; i<SCREENHIGHT/10; ++i)
+    {
+        for (int j=0; j<SCREENWIDTH/10; ++j)
+        {
+            array[i][j]=arrayTemp[i][j];
+        }
+    }
     SDL_Delay(speed);
     veiw(array,screenWidth+1,0,ren);
    }
     freeMemory(arrayTemp);
 }
->>>>>>> 515052e322fa2605b35ac7130d17b496fd2b0484:HomeWork/021_gameLife/gameOfLife/main.c
 
 void freeMemory(int **array){
     for(int i=0;i<SCREENHIGHT/10;i++)
@@ -344,4 +250,3 @@ void freeMemory(int **array){
     free(array);
     array=NULL;
 }
-
