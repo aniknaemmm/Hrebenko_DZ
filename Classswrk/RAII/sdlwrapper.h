@@ -21,7 +21,7 @@ class SDLRendererWrapper{
 public:
     SDLRendererWrapper(SDL_Window *win,int index ,Uint32 flags);
     ~SDLRendererWrapper();
-    SDL_Renderer *ren();
+    SDL_Renderer *ren(){return ren_;}
 private:
     SDL_Renderer *ren_;
 };
