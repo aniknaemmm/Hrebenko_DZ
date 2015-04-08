@@ -10,12 +10,7 @@ int main(void)
         if((string[i]&0x80)==0)
         codepoint++;
         tempstring=string[i];
-        for(;(tempstring&0x80)!=0;tempstring<<1)
-        {
-            printf("\n%x\n",tempstring);
-            i++;
 
-        }
             codepoint++;
         //if((string[i]&0xE0)==0xC0)
 
