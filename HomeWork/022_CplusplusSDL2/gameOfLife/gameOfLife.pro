@@ -4,7 +4,8 @@ CONFIG -= app_bundle
 CONFIG -= qt
 QMAKE_CXXFLAGS = -std=c++11
 SOURCES += main.cpp \
-    sdlwrapper.cpp
+    sdlwrapper.cpp \
+    gamelife.cpp
 
 include(deployment.pri)
 qtcAddDeployment()
@@ -13,4 +14,5 @@ qtcAddDeployment()
 unix|win32: LIBS += -lSDL2
 
 HEADERS += \
-    sdlwrapper.h
+    sdlwrapper.h \
+    gamelife.h
