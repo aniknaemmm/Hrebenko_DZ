@@ -1,33 +1,83 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "textEditor.h"
-#include "../../../modules/include/ncursesinit.h"
+
 int main()
 {
-
+    int maxCol, maxRow, col = 0, row = 0;
+    Work status = work;
     initialiseProgram();
-
-
+    sizeWindow(&maxCol, &maxRow);    // row - strok
     Node **text = NULL;
-    Node temp;
-    int x = 0;
-    text = initListTextEditor();
-    addNode(&text[0], 10);
+    text = initListTextEditor(maxRow);
+    maxCol-=1;//wtf mode
+    BufferNode **bufer = NULL;   //  mb no row&?
 
-    addNode(&text[1], 15);
-    addNode(&text[1], 15);
-    int m=text[1]->position;
-   // x = text[0][0].position;
-    //printf("%d", text[0][0].position);
+    //maxCol=5;//temp max Col data
+    while(status != exits)
+    {
+        keypad(stdscr, true);
+        int action = getch();
+
+        switch(action)
+        {
+        case KEY_UP:
+
+            break;
+
+        case KEY_DOWN:
+
+            break;
+
+        case KEY_LEFT:
+            leftOperation(text, &row);
+            break;
+
+        case KEY_RIGHT:
+
+            break;
+
+        case 10:
+              pressEnter(text,&row,maxRow); //press Enter
+            break;
+
+        case KEY_BACKSPACE :
+            //del symbol
+            break;
+
+        case KEY_END:
+            status = exits; //close document
+            break;
+
+        case KEY_SLEFT :
+            //use other option : save read
+
+            break;
+
+        default :
+            enterData(text, row, action);
 
 
 
+            break;
+        }
 
+        showTextEditor(text,row, maxRow,maxCol);
+        if(rowPosition(text, maxCol, row))
+            row++;
 
+    }
 
-    attron(COLOR_PAIR(blue) | A_BOLD);
+    attron(A_REVERSE);
+    printw("%d %d", maxCol, maxRow);
+    attroff(A_REVERSE);
 
-    attroff(COLOR_PAIR(blue) | A_BOLD);
+    /*   attron(COLOR_PAIR(blue) | A_BOLD);
+
+       attroff(COLOR_PAIR(blue) | A_BOLD);
+
+    */
+
     getch();
     endwin();
     return 0;
