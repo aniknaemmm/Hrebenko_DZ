@@ -9,6 +9,8 @@ typedef struct Node_
     char text;
     int position;
     Flag flag;
+    struct Node_ *head;
+    struct Node_ *tail;
     struct Node_ *link;
     struct Node_ *next;
 
@@ -28,10 +30,13 @@ typedef struct BufferNode_
 Node **initListTextEditor(int row);
 void addNode(Node **list, int row , char data);
 void sizeWindow(int *cols, int  *row);
-void showTextEditor(Node **list, int row , int maxRow, int maxCol);
-void enterData(Node **list, int row, char data);
+void showTextEditor(Node **list, int maxRow);
+void enterData(Node **list, int *row, char data);
 bool rowPosition(Node **list, int maxCol, int row);
 int chekCol(Node **list, int row);
-void leftOperation(Node **list, int *row);
-void pressEnter(Node **list, int *row,int maxRow);
+bool leftOperation(Node **list, int *row);
+bool rightOperation(Node **list, int *row,int maxCol,int maxRow);
+void pressEnter(Node **list, int *row, int maxRow);
+int chekMaxColPosition(Node **listTemp, int row);
+void dellRow(Node **list, int row);
 #endif // TEXTEDITOR_H_INCLUDED
