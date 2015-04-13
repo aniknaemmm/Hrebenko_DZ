@@ -4,7 +4,7 @@ CONFIG -= app_bundle
 CONFIG -= qt
 QMAKE_CXXFLAGS = -std=c++11
 SOURCES += main.cpp \
-    akinator.c
+    akinator.cpp
 
 include(deployment.pri)
 qtcAddDeployment()

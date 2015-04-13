@@ -3,7 +3,7 @@
 #include <cstring>
 #include "akinator.h"
 using namespace std;
-
+using namespace function;
 int main(void)
 {
     char newAnimal[MAX_STRING_SIZE], newQuestion[MAX_STRING_SIZE];
