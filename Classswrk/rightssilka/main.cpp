@@ -96,6 +96,21 @@ swap переменных местами
         }
 
 
+        ///other
+
+        template <int n>
+        int f()
+        {
+            return n*f<n-1>();
+        }
+
+        пециализация
+        template<>
+        int f<0>()
+        {
+            return 1;
+        }
+
 
 
 
