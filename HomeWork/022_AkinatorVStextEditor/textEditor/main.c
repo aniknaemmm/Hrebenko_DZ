@@ -14,7 +14,7 @@ int main()
     BufferNode **bufer = NULL;   //  mb no row&?
     addNode(text, row, ' ');  //// vremenno
     showTextEditor(text, maxRow);
-    //maxCol = 5; //temp max Col data
+    maxCol = 5; //temp max Col data
 
     while(status != exits)
     {
@@ -25,11 +25,11 @@ int main()
         switch(action)
         {
         case KEY_UP:
-
+            upOperation(text, &row);
             break;
 
         case KEY_DOWN:
-
+            downOperation(text, &row);
             break;
 
         case KEY_LEFT:
@@ -37,7 +37,7 @@ int main()
             break;
 
         case KEY_RIGHT:
-            rightOperation(text,&row,maxCol,maxRow);
+            rightOperation(text, &row, maxCol, maxRow);
             break;
 
         case 10:
@@ -59,6 +59,9 @@ int main()
 
         default :
             enterData(text, &row, action);
+
+
+
             break;
         }
 

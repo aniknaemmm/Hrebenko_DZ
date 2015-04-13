@@ -39,4 +39,6 @@ bool rightOperation(Node **list, int *row,int maxCol,int maxRow);
 void pressEnter(Node **list, int *row, int maxRow);
 int chekMaxColPosition(Node **listTemp, int row);
 void dellRow(Node **list, int row);
+bool upOperation(Node **list, int *row);
+bool downOperation(Node **list, int *row);
 #endif // TEXTEDITOR_H_INCLUDED
