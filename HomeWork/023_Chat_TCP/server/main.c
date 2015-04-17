@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <sys/socket.h>
-#include <netinet/in.h>//sockaddrin struct
-#include <unistd.h>// write and read
+#include <netinet/in.h>
+#include <unistd.h>
 #include <string.h>
 int main(void)
 {
@@ -13,10 +13,10 @@ int main(void)
         return 1;
     }
 
-    int error; //code error
+    int error;
     struct sockaddr_in local;
     local.sin_family = AF_INET;
-    local.sin_port = htons(7500); //setevoi poriadok byt
+    local.sin_port = htons(7500);
     local.sin_addr.s_addr = htonl(INADDR_ANY);
 
     error = bind(listenSocket, (struct sockaddr *)&local, sizeof(local));
@@ -43,24 +43,37 @@ int main(void)
         return 1;
     }
 
-    char buf[128];
-    error = read(aSocket, buf, 128);
+    char buf[128] = {0};
+    char serverbuf[128] = {0};
 
-    if(error <= 0)
+    while(1)
     {
-        write(2, "ERR:read\n", 9);
-        return 1;
-    }
 
-    write(1, buf, strlen(buf));
-    write(1, "\n", 1);
+        error = read(aSocket, buf, 128);
 
-    error = write(aSocket, " error: can't connection ", strlen(" error: can't connection "));
+        if(error <= 0)
+        {
+            write(2, "ERR:read\n", 9);
+            return 1;
+        }
 
-    if(error <= 0)
-    {
-        write(2, "ERR:read\n", 9);
-        return 1;
+        write(1, "client: ", 8);
+
+        write(1, buf, strlen(buf));
+
+        for(int i = 0; i < 128; i++) buf[i] = 0;
+
+        write(1, "server: ", 8);
+        fgets(serverbuf, 128, stdin);
+        error = write(aSocket, serverbuf, strlen(serverbuf));
+
+        if(error <= 0)
+        {
+            write(2, "ERR:read\n", 9);
+            return 1;
+        }
+
+        for(int i = 0; i < 128; i++) serverbuf[i] = 0;
     }
 
     return 0;

@@ -108,7 +108,7 @@ void prefix(Node *curr, FILE *file)
         return;
     }
 
-    if(file == NULL)
+    if(file == nullptr)
     {
         fprintf(stderr, "not founded\n");
         exit(1);

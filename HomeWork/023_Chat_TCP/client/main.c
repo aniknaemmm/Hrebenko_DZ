@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <sys/socket.h>
-#include <netinet/in.h>//sockaddrin struct
-#include <arpa/inet.h>//только для клиента
-#include <unistd.h>// write and read
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <unistd.h>
 #include <string.h>
 int main(int argc, char **argv)
 {
@@ -15,10 +15,10 @@ int main(int argc, char **argv)
         return 1;
     }
 
-    int error; //code error
+    int error;
     struct sockaddr_in peer;
     peer.sin_family = AF_INET;
-    peer.sin_port = htons(7500); //setevoi poriadok byt
+    peer.sin_port = htons(7500);
     peer.sin_addr.s_addr = inet_addr(argv[1]);
 
     error = connect(aSocket, (struct sockaddr *)&peer, sizeof(peer));
@@ -29,25 +29,38 @@ int main(int argc, char **argv)
         return 1;
     }
 
-    error = write(aSocket, "olalala", 7);
 
-    if(error <= 0)
-    {
-        write(2, "ERR:write\n", 10);
-        return 1;
-    }
-
+    char clientbuf[128];
     char buf[128];
-    error = read(aSocket, buf, 128);
 
-    if(error <= 0)
+    for(;;)
     {
-        write(2, "ERR:read\n", 9);
-        return 1;
-    }
+    write(1, "client: ", 8);
+        fgets(clientbuf, 128, stdin);
+        error = write(aSocket, clientbuf, strlen(clientbuf));
 
-    write(1, buf, strlen(buf));
-    write(1, "\n", 1);
+        if(error <= 0)
+        {
+            write(2, "ERR:write\n", 10);
+            return 1;
+        }
+
+        for(int i = 0; i < 128; i++) clientbuf[i] = 0;
+
+        error = read(aSocket, buf, 128);
+
+        if(error <= 0)
+        {
+            write(2, "ERR:read\n", 9);
+            return 1;
+        }
+
+        write(1, "server: ", 8);
+        write(1, buf, strlen(buf));
+       // write(1, "\n", 1);
+
+        for(int i = 0; i < 128; i++) buf[i] = 0;
+    }
 
     return 0;
 }
