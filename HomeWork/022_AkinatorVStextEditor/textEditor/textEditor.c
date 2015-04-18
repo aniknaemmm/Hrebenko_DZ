@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <sys/ioctl.h>
 #include <stdbool.h>
-
+#include <assert.h>
 void sizeWindow(int *cols, int  *row)
 {
     struct winsize size;
@@ -13,10 +13,11 @@ void sizeWindow(int *cols, int  *row)
 }
 
 
-Node **initListTextEditor(int row)
+ListAllNode *initListTextEditor(int row)
 {
-    Node **tempList = NULL;
-    tempList = (Node **)malloc(row * sizeof(Node *));
+    ListAllNode *tempList = NULL;
+
+    tempList = (ListAllNode *)malloc(sizeof(ListAllNode));
 
     if(tempList == NULL)
     {
@@ -24,10 +25,32 @@ Node **initListTextEditor(int row)
         exit(-2);
     }
 
-    for(int i = 0; i < row; i++)
-        tempList[i] = NULL;
+    tempList->head = tempList;
+    tempList->link = NULL;
+    tempList->next = NULL;
+    tempList->tail = tempList;
+    tempList->string = NULL;
+    ListAllNode *generateList = tempList;
+    tempList = NULL;
 
-    return tempList;
+    for(int i = 0; i < (row - 1); i++)
+    {
+        tempList = (ListAllNode *)malloc(sizeof(ListAllNode));
+
+        if(tempList == NULL)
+        {
+            fprintf(stderr, "errr memory");
+            exit(-2);
+        }
+
+        tempList->head = generateList->head;
+        tempList->link = generateList;
+        tempList->next = NULL;
+        tempList->tail = tempList;
+        tempList->string = NULL;
+        tempList = NULL;
+    }
+  return generateList->head;
 
 }
 
@@ -259,7 +282,7 @@ bool upOperation(Node **list, int *row)
         }
         else
         {
-            pos = chekCol(list, *row)-1;
+            pos = chekCol(list, *row) - 1;
             list[*row]->flag = nocurs;
             *row -= 1;
             list[*row] = list[*row]->head;
@@ -307,7 +330,7 @@ bool downOperation(Node **list, int *row)
 {
     int pos;
 
-    if(list[*row+1]==NULL)
+    if(list[*row + 1] == NULL)
         return false;
     else
     {
@@ -320,7 +343,7 @@ bool downOperation(Node **list, int *row)
         }
         else
         {
-            pos = chekCol(list, *row)-1;
+            pos = chekCol(list, *row) - 1;
             list[*row]->flag = nocurs;
             *row += 1;
             list[*row] = list[*row]->head;

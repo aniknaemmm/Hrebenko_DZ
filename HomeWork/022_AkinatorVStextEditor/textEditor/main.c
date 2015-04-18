@@ -8,7 +8,7 @@ int main()
     Work status = work;
     initialiseProgram();
     sizeWindow(&maxCol, &maxRow);    // row - strok
-    Node **text = NULL;
+    ListAllNode *text = NULL;
     text = initListTextEditor(maxRow);
     maxCol -= 1; //wtf mode
     BufferNode **bufer = NULL;   //  mb no row&?

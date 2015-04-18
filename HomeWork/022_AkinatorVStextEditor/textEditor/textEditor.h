@@ -35,8 +35,7 @@ typedef struct ListAllNode_
     struct Node *string;
 } ListAllNode;
 
-
-Node **initListTextEditor(int row);
+ListAllNode *initListTextEditor(int row);
 void addNode(Node **list, int row , char data);
 void sizeWindow(int *cols, int  *row);
 void showTextEditor(Node **list, int maxRow);
