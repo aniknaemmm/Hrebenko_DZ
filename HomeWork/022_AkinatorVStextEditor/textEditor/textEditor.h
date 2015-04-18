@@ -25,6 +25,15 @@ typedef struct BufferNode_
 
 } BufferNode;
 
+typedef struct ListAllNode_
+{
+
+    struct ListAllNode_ *head;
+    struct ListAllNode_ *tail;
+    struct ListAllNode_ *link;
+    struct ListAllNode_ *next;
+    struct Node *string;
+} ListAllNode;
 
 
 Node **initListTextEditor(int row);
@@ -35,7 +44,7 @@ void enterData(Node **list, int *row, char data);
 bool rowPosition(Node **list, int maxCol, int row);
 int chekCol(Node **list, int row);
 bool leftOperation(Node **list, int *row);
-bool rightOperation(Node **list, int *row,int maxCol,int maxRow);
+bool rightOperation(Node **list, int *row, int maxCol, int maxRow);
 void pressEnter(Node **list, int *row, int maxRow);
 int chekMaxColPosition(Node **listTemp, int row);
 void dellRow(Node **list, int row);
