@@ -4,6 +4,7 @@
 #include <sys/ioctl.h>
 #include <stdbool.h>
 #include <assert.h>
+
 void sizeWindow(int *cols, int  *row)
 {
     struct winsize size;
@@ -47,6 +48,7 @@ ListAllNode *initListTextEditor(int row)
         tempList->link = generateList;
         tempList->next = NULL;
         tempList->tail = tempList;
+        generateList->tail = tempList;
         tempList->string = NULL;
         generateList->next = tempList;
         generateList = generateList->next;
@@ -75,7 +77,6 @@ void addNode(ListAllNode *list, char data)
 
     nodeData->text = data;
 
-
     if(list->string == NULL)
     {
         nodeData->flag = curs;
@@ -88,19 +89,32 @@ void addNode(ListAllNode *list, char data)
     }
     else
     {
-
         if(list->string->link == NULL)
         {
-            nodeData->head = nodeData;
-            list->string->head = nodeData;
-            nodeData->next = list->string;
-            nodeData->link = NULL;
-            nodeData->tail = list->string->tail;
-            list->string->head = nodeData;
-            list->string->link = nodeData;
+
+            // one element
+            // one element-->>two elemetn
+            // one element || two element || three element
+            list->string->flag = nocurs;
+            nodeData->flag = curs;
+            nodeData->head = list->string;
+
+            if(list->string->next == NULL)   nodeData->tail = nodeData; // for one element string
+            else nodeData->tail = list->string->tail;
+
+            nodeData->link = list->string;
+            nodeData->next = list->string->next;
+
+            if(list->string->next != NULL) list->string->next->link = nodeData; //если есть следующий элемент то привязываем к нему вставленный элемент
+
+            list->string->next = nodeData;
+            nodeData->text = list->string->text;
+            list->string->text = data;
+            list->string = nodeData;
         }
         else
         {
+            // nodeData->flag = curs;
             nodeData->head = list->string->head;
             list->string->link->next = nodeData;
             nodeData->link = list->string->link;
@@ -118,7 +132,7 @@ void addNode(ListAllNode *list, char data)
 
 void enterData(ListAllNode *list, char data)
 {
-    //сдвиг текста на новую строку при написание + учёт границ
+    //сдвиг текста на новую строку при написание + учёт границ!!(доделать)
 
     addNode(list, data);
 
@@ -126,13 +140,14 @@ void enterData(ListAllNode *list, char data)
 }
 void showTextEditor(ListAllNode *list, int maxRow)
 {
+    assert(list);
     ListAllNode *rowList = NULL;
     Node *tempString = NULL;
     int col = 0, exit = 0;
     rowList = list->head;
     tempString = list->head->string->head;
 
-    for(int row = 0; row < maxRow - 1; row++)
+    for(int row = 0; row < maxRow; row++)
     {
         while(!exit && (rowList->string != NULL))
         {
@@ -161,10 +176,14 @@ void showTextEditor(ListAllNode *list, int maxRow)
 
         exit = 0;
         col = 0;
-        rowList = rowList->next;
 
-        if(rowList->string != NULL)
-            tempString = rowList->string->head;
+        if(rowList->next != NULL)
+        {
+            rowList = rowList->next;
+
+            if(rowList->string != NULL)
+                tempString = rowList->string->head;
+        }
     }
 
     //-----------costil
@@ -178,6 +197,7 @@ void showTextEditor(ListAllNode *list, int maxRow)
 
 int chekCol(ListAllNode *listTemp)
 {
+    assert(listTemp);
     Node *list = listTemp->string;
     int exit = 0;
     int col = 0;
@@ -195,19 +215,21 @@ int chekCol(ListAllNode *listTemp)
             list = list->link;
     }
 
-
+    list = NULL;
     return col;
 }
 
-int chekMaxColPosition(Node **listTemp, int row)
+int chekMaxColPosition(ListAllNode *listTemp)
 {
+    assert(listTemp);
+    Node *list = listTemp->string->tail;
+
     int exit = 0;
     int col = 0;
 
-    if(listTemp[row] == NULL)
+    if(list == NULL)
         return col;
 
-    Node *list = listTemp[row]->tail;
 
     while(!exit)
     {
@@ -245,154 +267,295 @@ bool rowPosition(ListAllNode *listTemp)
 
 }
 
-bool leftOperation(ListAllNode *list)
+bool backSpace(ListAllNode **list)//доработать
 {
-    Node *position = list->string;
+    Node *position = (*list)->string->link;
+    Node *temp;
+
+    if(position == NULL)
+    {
+        return false;
+    }
+    else
+    {
+
+
+        // one
+        // one <-- two
+        // one <-- two <-- three
+
+
+        if(position->link != NULL) position->link->next = position->next;
+
+        position->next->link = position->link;
+        temp = position;
+        free(temp);
+        position = NULL;
+    }
+
+    return true;
+}
+
+
+
+bool leftOperation(ListAllNode **list)
+{
+    Node *position = (*list)->string;
 
     if(position->link == NULL)
     {
-        if(list->link == NULL)
+        if((*list)->link == NULL)
             return false;
 
         position->flag = nocurs;
-        list = list->link;
-        list->string = list->string->tail;
-        list->string->flag = curs;
+        (*list) = (*list)->link;
+        (*list)->string = (*list)->string->tail;
+        (*list)->string->flag = curs;
     }
     else
     {
         position->flag = nocurs;
-        list->string = list->string->link;
-        list->string->flag = curs;
+        (*list)->string = (*list)->string->link;
+        (*list)->string->flag = curs;
     }
 
     return true;
 }
 
-bool upOperation(ListAllNode *list)
+bool upOperation(ListAllNode **list)
 {
+    int pos; //временная переменная для записи позиции при перемещение курсора
 
-
-    if(list->link == NULL)
+    if((*list)->link == NULL)
         return false;
 
-    /*  else
-      {
-          if(chekCol(list, *row) > chekMaxColPosition(list, *row - 1))
-          {
-              list[*row]->flag = nocurs;
-              *row -= 1;
-              list[*row] = list[*row]->tail;
-              list[*row]->flag = curs;
-          }
-          else
-          {
-              pos = chekCol(list, *row) - 1;
-              list[*row]->flag = nocurs;
-              *row -= 1;
-              list[*row] = list[*row]->head;
+    else
+    {
+        if(chekCol(*list) > chekMaxColPosition((*list)->link))
+        {
+            (*list)->string->flag = nocurs;
+            (*list) = (*list)->link;
+            (*list)->string = (*list)->string->tail;
+            (*list)->string->flag = curs;
+        }
+        else
+        {
+            pos = chekCol(*list) - 1;
+            (*list)->string->flag = nocurs;
+            (*list) = (*list)->link;
+            (*list)->string = (*list)->string->head;
 
-              while(pos)
-              {
-                  list[*row] = list[*row]->next;
-                  pos--;
-              }
+            while(pos)
+            {
+                (*list)->string = (*list)->string->next;
+                pos--;
+            }
 
-              list[*row]->flag = curs;
+            (*list)->string->flag = curs;
 
-          }
-      }*/
+        }
+    }
 
     return true;
 }
 
-bool rightOperation(ListAllNode *list)
+bool rightOperation(ListAllNode **list)
 {
-    if((list->string->next == NULL))
+    if(((*list)->string->next == NULL))
     {
-        if(list->next == NULL)
+        if((*list)->next->string == NULL)
             return false;
 
-        list->string->flag = nocurs;
-        list = list->next;
-        list->string = list->string->head;
-        list->string->flag = curs;
+        (*list)->string->flag = nocurs;
+        (*list) = (*list)->next;
+        (*list)->string = (*list)->string->head;
+        (*list)->string->flag = curs;
     }
     else
     {
-        list->string->flag = nocurs;
-        list->string = list->string->next;
-        list->string->flag = curs;
+        (*list)->string->flag = nocurs;
+        (*list)->string = (*list)->string->next;
+        (*list)->string->flag = curs;
     }
 
     return true;
 }
 
-bool downOperation(ListAllNode *list)
+bool downOperation(ListAllNode **list)
 {
-    int pos;
+    int pos; //временная переменная для записи позиции при перемещение курсора
 
-    /*  if(list[*row + 1] == NULL)
-          return false;
-      else
-      {
-          if(chekCol(list, *row) > chekMaxColPosition(list, *row + 1))
-          {
-              list[*row]->flag = nocurs;
-              *row += 1;
-              list[*row] = list[*row]->tail;
-              list[*row]->flag = curs;
-          }
-          else
-
-          {
-              pos = chekCol(list, *row) - 1;
-              list[*row]->flag = nocurs;
-              *row += 1;
-              list[*row] = list[*row]->head;
-
-              while(pos)
-              {
-                  list[*row] = list[*row]->next;
-                  pos--;
-              }
-
-              list[*row]->flag = curs;
-
-          }
-      }*/
-
-    return true;
-}
-
-
-
-void pressEnter(ListAllNode *list) //встовляет строку
-{
-
-    list->string->flag = nocurs;
-
-    if(list->next != NULL)
+    if(((*list)->next == NULL) || ((*list)->next->string == NULL))
+        return false;
+    else
     {
-        list = list->next;
+        if(chekCol(*list) > chekMaxColPosition((*list)->next))
+        {
+            (*list)->string->flag = nocurs;
+            (*list) = (*list)->next;
+            (*list)->string = (*list)->string->tail;
+            (*list)->string->flag = curs;
+        }
+        else
+        {
+            pos = chekCol(*list) - 1;
+            (*list)->string->flag = nocurs;
+            (*list) = (*list)->next;
+            (*list)->string = (*list)->string->head;
 
-        addNode(list, ' ');
+            while(pos)
+            {
+                (*list)->string = (*list)->string->next;
+                pos--;
+            }
+
+            (*list)->string->flag = curs;
+
+        }
     }
 
-// else
-//{
-//}
+    return true;
 }
 
-void dellRow(Node **list, int row)
+
+
+void pressEnter(ListAllNode **list) //встовляет строку?
 {
+
+
+
+    if((*list)->next != NULL)
+    {
+        if((*list)->next->string == NULL)
+        {
+            (*list)->string->flag = nocurs;
+            (*list) = (*list)->next;
+            addNode(*list, ' ');
+        }
+    }
+
+
+}
+
+void cleanList(ListAllNode **list)
+{
+    (*list) = (*list)->head;
+    system("clear");
     Node *clear;
+    Node *string = (*list)->string->head;
+    int exit = 0;
 
-    while(list[row]->link)
+    while(!exit)
     {
-        clear = list[row];
-        list[row] = list[row]->link;
-        free(clear);
+
+        while(string)
+        {
+            clear = string;
+            string = string->next;
+            free(clear);
+        }
+
+
+        if((*list)->next == NULL)
+            exit = 1;
+        else
+            (*list) = (*list)->next;
+    }
+
+    addNode((*list)->head, ' ');
+    (*list) = (*list)->head;
+}
+
+
+void writeToFile(ListAllNode *list, FILE *file, int maxRow)
+{
+
+
+    ListAllNode *rowList = NULL;
+    Node *tempString = NULL;
+    int exit = 0, col = 0;
+    rowList = list->head;
+
+    while(!exit)
+    {
+
+        col++;
+
+        if(rowList->next->string == NULL)
+            exit = 1;
+        else
+            rowList = rowList->next;
+
+    }
+
+    fprintf(file , "%d ", col);
+
+    rowList = list->head;
+    tempString = list->head->string->head;
+    exit = 0;
+
+    for(int row = 0; row < maxRow; row++)
+    {
+        while(!exit && (rowList->string != NULL))
+        {
+            fprintf(file , "%c", tempString->text);
+
+            if(tempString->next == NULL)
+                exit = 1;
+            else
+                tempString = tempString->next;
+
+        }
+
+        fprintf(file , "\n");
+        exit = 0;
+
+        if(rowList->next != NULL)
+        {
+            rowList = rowList->next;
+
+            if(rowList->string != NULL)
+                tempString = rowList->string->head;
+        }
     }
 }
+
+void rInfoFile(ListAllNode **list, FILE *file, int maxCol)
+{
+    int size;// сколько строк считать
+    fscanf(file , "%d " , &size);// читаем из файла
+    //проверка на перепонение!
+    char data;
+    // cleanList(list);  //очистка листа для загрузки из файла а пока только один раз открыть
+    (*list) = (*list)->head;
+
+    while(size)
+    {
+        for(int i = 0; (i < maxCol) && (data != '\n'); i++)
+        {
+            data = fgetc(file);
+
+            if(data == '\n')
+            {
+                (*list)->string->flag = nocurs;
+
+                if((*list)->next != NULL)(*list) = (*list)->next;
+
+                addNode(*list, ' ');
+            }
+            else
+            {
+                addNode(*list, data);
+            }
+
+        }
+
+        size--;
+        data = 0;
+
+    }
+}
+
+
+
 
