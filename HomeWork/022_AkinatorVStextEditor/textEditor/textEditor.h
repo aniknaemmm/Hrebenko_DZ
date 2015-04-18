@@ -4,6 +4,7 @@
 typedef enum Flags_ {nocurs = 0, curs} Flag;
 typedef enum Head_  {head = 0, nohead} Head;
 typedef enum Work_  {work = 0, exits} Work;
+
 typedef struct Node_
 {
     char text;
@@ -32,21 +33,23 @@ typedef struct ListAllNode_
     struct ListAllNode_ *tail;
     struct ListAllNode_ *link;
     struct ListAllNode_ *next;
-    struct Node *string;
+    struct Node_ *string; // почему в это структуре надо использовать Node_ !!
 } ListAllNode;
 
 ListAllNode *initListTextEditor(int row);
-void addNode(Node **list, int row , char data);
 void sizeWindow(int *cols, int  *row);
-void showTextEditor(Node **list, int maxRow);
-void enterData(Node **list, int *row, char data);
-bool rowPosition(Node **list, int maxCol, int row);
-int chekCol(Node **list, int row);
-bool leftOperation(Node **list, int *row);
-bool rightOperation(Node **list, int *row, int maxCol, int maxRow);
-void pressEnter(Node **list, int *row, int maxRow);
+void enterData(ListAllNode *list, char data);
+void addNode(ListAllNode *list, char data);
+void showTextEditor(ListAllNode *list, int maxRow);
+bool rowPosition(ListAllNode *list);
+void pressEnter(ListAllNode *list);
+int chekCol(ListAllNode *listTemp);
+bool upOperation(ListAllNode *list);
+bool downOperation(ListAllNode *list);
+bool leftOperation(ListAllNode *list);
+bool rightOperation(ListAllNode *list);
+
+
 int chekMaxColPosition(Node **listTemp, int row);
 void dellRow(Node **list, int row);
-bool upOperation(Node **list, int *row);
-bool downOperation(Node **list, int *row);
 #endif // TEXTEDITOR_H_INCLUDED
