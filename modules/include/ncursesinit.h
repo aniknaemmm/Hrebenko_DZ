@@ -5,8 +5,6 @@
 #define _POSIX_C_SOURCE	199309L
 #include <sys/ioctl.h>
 #include <signal.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <ncurses.h>
 #include <locale.h>
 

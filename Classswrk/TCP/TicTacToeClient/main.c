@@ -6,10 +6,10 @@
 #include <string.h>
 #include <stdlib.h>
 #include "../../../modules/include/ncursesinit.h"
+#include "../../../HomeWork/015_TicTacToeArraySort/TicTacToe20x20/TTT.h"
 #define SIZE 20
-
-
-
+void toTransfer(int mass[][SIZE], int buf[]);
+void backTransfer(int mass[][SIZE], int buf[]);
 int main(int argc, char **argv)
 {
     initialiseProgram();
@@ -35,54 +35,82 @@ int main(int argc, char **argv)
         return 1;
     }
 
+    int exit = 0;
+    int buf[SIZE * SIZE] = {0};
+    int mass[SIZE][SIZE] = {{0}};
+    drawTable();
 
-    int clientbuf[SIZE + 1][SIZE] = {{0}};
-
-    while(1)
+    while(!exit)
     {
 
-        playGame(clientbuf);
+        playGame(mass);
+        toTransfer(mass, buf);
+        error = write(aSocket, buf, SIZE  * SIZE * sizeof(int));
 
-        if(chekWinGame(clientbuf) != 0)
-        {
-            //выход
-        }
-        else
-        {
-
-            error = write(aSocket, clientbuf, 128);
-
-            if(error <= 0)
-            {
-                write(2, "ERR:write\n", 10);
-                return 1;
-            }
-        }
-
-
-        error = read(aSocket, clientbuf, 128);
 
         if(error <= 0)
         {
-            write(2, "ERR:read\n", 9);
+            write(2, "ERR:write\n", 10);
             return 1;
         }
 
-        drwka(clientbuf);
-        //write(1, "server: ", 8);
-        //write(1, buf, strlen(buf));
-        // write(1, "\n", 1);
+        if(chekWinGame(mass) != 0)
+        {
+            move(21, 0);
+            printw("you win");
+            exit = 1;
+        }
+        else
+        {
+            error = read(aSocket, buf, SIZE  * SIZE * sizeof(int));
+            backTransfer(mass, buf);
 
+            if(error <= 0)
+            {
+                write(2, "ERR:read\n", 9);
+                return 1;
+            }
+
+            drwka(mass);
+
+            if(chekWinGame(mass) != 0)
+            {
+                move(21,0);
+                printw("you lose");
+                exit = 1;
+            }
+        }
 
     }
-
+refresh();
+    getchar();
     endwin();
     return 0;
 }
 
+void toTransfer(int mass[][SIZE], int buf[])
+{
+    int num = 0;
 
+    for(int i = 0; i < SIZE; i++)
+    {
+        for(int k = 0; k < SIZE; k++)
+        {
+            buf[num] = mass[i][k];
+            num++;
+        }
+    }
+}
+void backTransfer(int mass[][SIZE], int buf[])
+{
+    int num = 0;
 
-
-
-
-
+    for(int i = 0; i < SIZE; i++)
+    {
+        for(int k = 0; k < SIZE; k++)
+        {
+            mass[i][k] = buf[num] ;
+            num++;
+        }
+    }
+}
