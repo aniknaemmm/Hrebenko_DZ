@@ -4,17 +4,17 @@
 
 int main()
 {
-    int maxCol, maxRow, col = 0, row = 0;
+    FILE *file = NULL;
+    int maxCol, maxRow;
     Work status = work;
     initialiseProgram();
-    sizeWindow(&maxCol, &maxRow);    // row - strok
-    Node **text = NULL;
+    sizeWindow(&maxCol, &maxRow);
+    ListAllNode *text = NULL;
     text = initListTextEditor(maxRow);
-    maxCol -= 1; //wtf mode
-    BufferNode **bufer = NULL;   //  mb no row&?
-    addNode(text, row, ' ');  //// vremenno
+    maxRow -= 1;
+    //BufferNode **bufer = NULL;   //  mb no row&?
+    addNode(text, ' ');  //// vremenno
     showTextEditor(text, maxRow);
-    maxCol = 5; //temp max Col data
 
     while(status != exits)
     {
@@ -25,40 +25,61 @@ int main()
         switch(action)
         {
         case KEY_UP:
-            upOperation(text, &row);
+            upOperation(&text);
             break;
 
         case KEY_DOWN:
-            downOperation(text, &row);
+            downOperation(&text);
             break;
 
         case KEY_LEFT:
-            leftOperation(text, &row);
+            leftOperation(&text);
             break;
 
         case KEY_RIGHT:
-            rightOperation(text, &row, maxCol, maxRow);
+            rightOperation(&text);
             break;
 
         case 10:
-            pressEnter(text, &row, maxRow); //press Enter
+            pressEnter(&text); //press Enter
             break;
 
-        case KEY_BACKSPACE :
+        case 127 :
             //del symbol
+            backSpace(&text);
             break;
 
-        case KEY_END:
+        /*case KEY_END:
             status = exits; //close document
+            break;*/
+
+        case KEY_HOME :     // option : save
+
+            file = fopen("../text.txt", "w");
+            writeToFile(text, file, maxRow);
+
+            fclose(file);
+            move(maxRow, 0);
+            printw(" save : well done");
             break;
 
-        case KEY_SLEFT :
-            //use other option : save read
+        case KEY_END :     // option : read
+            file = fopen("../text.txt", "r");
 
+            if(file == NULL)
+            {
+                move(maxRow, 10);
+                printw(" open :can't open");
+            }
+
+            rInfoFile(&text, file, maxCol);
+            fclose(file);
+            move(maxRow, 0);
+            printw(" open : well done");
             break;
 
         default :
-            enterData(text, &row, action);
+            enterData(text, action);
 
 
 
@@ -70,16 +91,6 @@ int main()
 
 
     }
-
-    attron(A_REVERSE);
-    printw("%d %d", maxCol, maxRow);
-    attroff(A_REVERSE);
-
-    /*   attron(COLOR_PAIR(blue) | A_BOLD);
-
-       attroff(COLOR_PAIR(blue) | A_BOLD);
-
-    */
 
     getch();
     endwin();
