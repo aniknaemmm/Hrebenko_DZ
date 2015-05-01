@@ -2,10 +2,10 @@
 #include "phil.h"
 int main(void)
 {
-    int *forks[5];
-    Phil *phil = initStart(&phil);
 
-    printf("Hello World!\n");
+    Phil *phil = initStart();
+    start(&phil);
+
     return 0;
 }
 

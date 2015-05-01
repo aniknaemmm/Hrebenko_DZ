@@ -10,18 +10,30 @@ int main(void)
     {
         buf[fgetc(file)]++;
     }
+
     int nzero;
+
     for(int i = 0; i < 256; i++)
     {
-        if(buf[i]>0)
+        if(buf[i] > 0)
             nzero++;
+
         printf("%d - %d\n", i, buf[i]);
     }
-    printf("nzero %d",nzero);
+
+    printf("nzero %d\n", nzero);
+    rewind(file);
+
+    int exit = 0;
 
 
+    while(temp++ < 30)
+    {
 
-    printf("Hello World!\n");
+
+    }
+
+
     return 0;
 }
 
