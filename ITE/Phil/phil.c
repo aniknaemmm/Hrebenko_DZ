@@ -155,5 +155,5 @@ void show(Phil *phil)
 
 int eatTime()
 {
-    return rand() % 5;
+    return rand() % 10;
 }
